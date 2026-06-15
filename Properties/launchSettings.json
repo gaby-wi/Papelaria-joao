@@ -1,15 +1,12 @@
 {
-"profiles": {
-"AppPapelaria1": {
+  "profiles": {
+    "AppPapelaria1": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-      "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:54308;http://localhost:54310",
-      "applicationUrl": "https://localhost:62857;http://localhost:62858",
-      "applicationUrl": "https://localhost:49208;http://localhost:49209",
-      "applicationUrl": "https://localhost:60666;http://localhost:60667"
-}
-}
+      "applicationUrl": "https://localhost:54308;http://localhost:54310;https://localhost:62857;http://localhost:62858;https://localhost:49208;http://localhost:49209;https://localhost:60666;http://localhost:60667"
+    }
+  }
 }
