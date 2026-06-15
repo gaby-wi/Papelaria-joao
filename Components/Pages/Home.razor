@@ -1,14 +1,104 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
-
- 
 <h1>Olá!</h1>
 <h1> Yhasmim Maia</h1>
 
 <h1>Hello, world Yasmim!</h1>
 
+<PageTitle>Dashboard - Papelaria Admin</PageTitle>
+
 <h1>Galera, na proxima aula ou em casa mesmo temos que comecar a ir fazendo as telas</h1>
 <h1>Bjs. Ass: Yasmim Lima</h1>
 
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800 fw-bold">Visão Geral</h1>
+        <button class="btn btn-primary shadow-sm">
+            <i class="bi bi-download me-2"></i>Gerar Relatório
+        </button>
+    </div>
+
+    <!-- Cards de Estatísticas -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Vendas (Mensal)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ 4.250,00</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-calendar-event fs-2 text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Produtos em Estoque</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">1.240</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-box-seam fs-2 text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pedidos Pendentes</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-clipboard-check fs-2 text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Alertas de Estoque Baixo</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-exclamation-triangle fs-2 text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<style>
+    .border-left-primary { border-left: 0.25rem solid #4e73df !important; }
+    .border-left-success { border-left: 0.25rem solid #1cc88a !important; }
+    .border-left-info { border-left: 0.25rem solid #36b9cc !important; }
+    .border-left-warning { border-left: 0.25rem solid #f6c23e !important; }
+    
+    .text-xs { font-size: .7rem; }
+    .text-gray-300 { color: #dddfeb !important; }
+    .text-gray-800 { color: #5a5c69 !important; }
+    
+    .card { border: none; border-radius: 0.75rem; }
+    .card-header { border-bottom: 1px solid #e3e6f0; }
+    
+    .badge { padding: 0.5em 0.8em; border-radius: 0.5rem; }
+</style>
 
