@@ -58,3 +58,149 @@ h1:focus {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+.pagina-inicial {
+    background: #f8fafc;
+    color: #1e293b;
+    min-height: 100vh;
+    padding: 2rem 1.5rem 4rem;
+}
+
+/* SEÇÕES */
+
+.secao-banner,
+.secao-destaques {
+    margin: 0 auto;
+    max-width: 1100px;
+}
+
+.secao-banner {
+    padding: 1.5rem 0 2rem;
+}
+
+/* BANNER */
+
+.banner-principal {
+    background: linear-gradient(135deg, #1d4ed8, #0f172a);
+    border-radius: 20px;
+    color: #f8fafc;
+    padding: 2rem;
+    text-align: center;
+}
+
+.subtitulo-banner,
+.numero-destaque {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.subtitulo-banner {
+    color: #bfdbfe;
+    margin-bottom: 0.75rem;
+}
+
+.titulo-banner {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0;
+}
+
+.texto-banner {
+    line-height: 1.6;
+    margin: 1rem auto 0;
+    max-width: 38rem;
+}
+
+/* CARDS */
+
+.secao-destaques {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.cartao-destaque {
+    background: #fff;
+    border: 1px solid #dbe4f0;
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    padding: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+    .cartao-destaque:hover {
+        transform: translateY(-4px);
+    }
+
+.cartao-claro {
+    background: #fff;
+}
+
+.cartao-escuro {
+    background: #1e293b;
+    color: #f8fafc;
+}
+
+.cartao-destaque-contato {
+    background: #fff7ed;
+}
+
+.numero-destaque {
+    color: #2563eb;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.cartao-destaque h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.7rem;
+    margin-bottom: 0.75rem;
+}
+
+.cartao-destaque p {
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+}
+
+.cartao-destaque a {
+    color: inherit;
+    font-weight: 700;
+}
+
+/* RESPONSIVIDADE */
+
+@media (min-width: 641px) {
+    .page {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .secao-destaques {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .pagina-inicial {
+        padding: 1rem 1rem 3rem;
+    }
+
+    .banner-principal,
+    .cartao-destaque {
+        border-radius: 14px;
+    }
+
+    .banner-principal {
+        padding: 1.5rem;
+    }
+}

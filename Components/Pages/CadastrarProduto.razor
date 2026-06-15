@@ -3,3 +3,78 @@
 @code {
 
 }
+
+<PageTitle>Cadastro de Produtos</PageTitle>
+
+<h1>Cadastro de Produtos</h1>
+
+<div>
+    <label>Código do Produto:</label><br />
+    <input type="text" @bind="codigo" />
+</div>
+
+<br />
+
+<div>
+    <label>Nome do Produto:</label><br />
+    <input type="text" @bind="nome" />
+</div>
+
+<br />
+
+<div>
+    <label>Categoria:</label><br />
+    <select @bind="categoria">
+        <option>Informática</option>
+        <option>Eletrônicos</option>
+        <option>Periféricos</option>
+        <option>Outros</option>
+    </select>
+</div>
+
+<br />
+
+<div>
+    <label>Preço:</label><br />
+    <input type="number" @bind="preco" />
+</div>
+
+<br />
+
+<div>
+    <label>Quantidade:</label><br />
+    <input type="number" @bind="quantidade" />
+</div>
+
+<br />
+
+<div>
+    <label>Descrição:</label><br />
+    <textarea @bind="descricao"></textarea>
+</div>
+
+<br />
+
+<button @onclick="CadastroProduto">
+    Cadastrar Produto
+</button>
+
+@if (!string.IsNullOrEmpty(mensagem))
+{
+    <h3>@mensagem</h3>
+}
+
+@code {
+    string codigo = "";
+    string nome = "";
+    string categoria = "";
+    decimal preco;
+    int quantidade;
+    string descricao = "";
+    string mensagem = "";
+
+    void CadastroProduto()
+    {
+        mensagem = $"Produto '{nome}' cadastrado com sucesso!";
+    }
+}
