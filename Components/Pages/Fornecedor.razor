@@ -1,5 +1,134 @@
-﻿<h3>Fornecedor</h3>
+﻿@page "/fornecedor"
 
-@code {
+<div class="container">
 
-}
+    <div class="topo">
+        <h1>📦 Fornecedor de Materiais</h1>
+        <p>Sistema de gerenciamento da papelaria</p>
+    </div>
+
+    <div class="conteudo">
+
+        <!-- FORMULÁRIO -->
+        <div class="card">
+
+            <h2>Cadastro de Fornecedor</h2>
+
+            <div class="grupo-input">
+                <label>Nome da Empresa</label>
+
+                <input type="text"
+                       placeholder="Digite o nome da empresa" />
+            </div>
+
+            <div class="grupo-input">
+                <label>CNPJ</label>
+
+                <input type="text"
+                       placeholder="00.000.000/0000-00" />
+            </div>
+
+            <div class="grupo-input">
+                <label>Telefone</label>
+
+                <input type="text"
+                       placeholder="(00) 00000-0000" />
+            </div>
+
+            <div class="grupo-input">
+                <label>Categoria</label>
+
+                <select>
+
+                    <option selected disabled>
+                        Selecione uma categoria
+                    </option>
+
+                    <option>Papelaria</option>
+                    <option>Informática</option>
+                    <option>Escritório</option>
+                    <option>Artes</option>
+
+                </select>
+            </div>
+
+            <div class="grupo-input">
+                <label>Observações</label>
+
+                <textarea placeholder="Digite observações sobre o fornecedor">
+                </textarea>
+            </div>
+
+            <div class="botoes">
+
+                <button class="btn-salvar">
+                    Salvar
+                </button>
+
+                <button class="btn-limpar">
+                    Limpar
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- TABELA -->
+        <div class="card">
+
+            <h2>Fornecedores Cadastrados</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Categoria</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>PapelMax</td>
+                        <td>Papelaria</td>
+
+                        <td>
+                            <span class="status">
+                                Ativo
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>TechOffice</td>
+                        <td>Informática</td>
+
+                        <td>
+                            <span class="status">
+                                Ativo
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Arte & Cor</td>
+                        <td>Artes</td>
+
+                        <td>
+                            <span class="status">
+                                Ativo
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
