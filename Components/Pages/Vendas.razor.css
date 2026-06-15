@@ -1,0 +1,172 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container-vendas {
+    width: 100%;
+    min-height: 100vh;
+    background: #f4edff;
+    padding: 30px;
+}
+
+/* TOPO */
+.topo-vendas {
+    background: linear-gradient(90deg, #c8a2ff, #9d63ff);
+    color: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(120,81,169,0.2);
+}
+
+    .topo-vendas h1 {
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+
+    .topo-vendas p {
+        opacity: 0.9;
+    }
+
+/* GRID */
+.conteudo-vendas {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+/* CARD */
+.card-vendas {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(120,81,169,0.15);
+}
+
+    .card-vendas h2 {
+        color: #7b3fe4;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+/* INPUTS */
+.grupo-input {
+    margin-bottom: 18px;
+}
+
+    .grupo-input label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #5d4d75;
+    }
+
+    .grupo-input input,
+    .grupo-input select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        border: 2px solid #d9c3ff;
+        outline: none;
+        font-size: 15px;
+        transition: .3s;
+    }
+
+        .grupo-input input:focus,
+        .grupo-input select:focus {
+            border-color: #9d63ff;
+            box-shadow: 0 0 8px rgba(157,99,255,0.2);
+        }
+
+/* BOTÕES */
+.botoes {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+button {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+/* BOTÃO ROXO */
+.btn-finalizar {
+    background: #9d63ff;
+    color: white;
+}
+
+    .btn-finalizar:hover {
+        background: #8649f0;
+        transform: translateY(-2px);
+    }
+
+/* BOTÃO CLARO */
+.btn-cancelar {
+    background: #eadcff;
+    color: #6b35c7;
+}
+
+    .btn-cancelar:hover {
+        background: #d9c0ff;
+    }
+
+/* TABELA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+    table th {
+        background: #b88cff;
+        color: white;
+        padding: 14px;
+        text-align: center;
+    }
+
+    table td {
+        padding: 14px;
+        text-align: center;
+        border-bottom: 1px solid #e7d9ff;
+    }
+
+    table tr:hover {
+        background: #f8f2ff;
+    }
+
+/* TOTAL */
+h3 {
+    color: #7b3fe4;
+    font-size: 28px;
+    margin: 20px 0;
+}
+
+/* MENSAGEM */
+p[style] {
+    background: #e7d6ff;
+    padding: 12px;
+    border-radius: 10px;
+    color: #6b35c7 !important;
+}
+
+/* RESPONSIVO */
+@media(max-width: 900px) {
+    .conteudo-vendas {
+        grid-template-columns: 1fr;
+    }
+
+    .botoes {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,82 @@
+﻿* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container-caixa {
+    width: 100%;
+    min-height: 100vh;
+    background: #f4edff;
+    padding: 30px;
+}
+
+.topo-caixa {
+    background: linear-gradient(90deg,#c8a2ff,#9d63ff);
+    color: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(120,81,169,0.2);
+}
+
+.card-caixa {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(120,81,169,0.15);
+}
+
+    .card-caixa h2 {
+        color: #7b3fe4;
+        margin-bottom: 20px;
+    }
+
+.grid-caixa {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.valor {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.entrada {
+    color: #28a745;
+}
+
+.saida {
+    color: #dc3545;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #9d63ff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+    button:hover {
+        background: #8649f0;
+    }
+
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #d9c3ff;
+    margin: 15px 0;
+}
+
+@media(max-width:900px) {
+    .grid-caixa {
+        grid-template-columns: 1fr;
+    }
+}

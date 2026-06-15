@@ -1,0 +1,195 @@
+@page "/vendas"
+
+<PageTitle>Registro de Vendas</PageTitle>
+
+<div class="container-vendas">
+
+    <div class="topo-vendas">
+        <h1>Registro de Vendas</h1>
+        <p>Gerencie suas vendas da papelaria</p>
+    </div>
+
+    <div class="conteudo-vendas">
+
+        <!-- PRODUTOS -->
+        <div class="card-vendas">
+            <h2>Produtos da Venda</h2>
+
+            <div class="grupo-input">
+                <label>Produto</label>
+                <input @bind="novoProduto"
+                       placeholder="Digite o nome do produto" />
+            </div>
+
+            <div class="grupo-input">
+                <label>Preço</label>
+                <input type="number" @bind="novoPreco" />
+            </div>
+
+            <div class="grupo-input">
+                <label>Quantidade</label>
+                <input type="number" @bind="novaQuantidade" />
+            </div>
+
+            <div class="botoes">
+                <button class="btn-finalizar"
+                        @onclick="AdicionarProduto">
+                    + Adicionar Produto
+                </button>
+
+                <button class="btn-cancelar"
+                        @onclick="LimparVenda">
+                    Limpar Venda
+                </button>
+            </div>
+
+            <br />
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Preço</th>
+                        <th>Qtd</th>
+                        <th>Total</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in itensVenda)
+                    {
+                        <tr>
+                            <td>@item.Nome</td>
+                            <td>R$ @item.Preco</td>
+                            <td>@item.Quantidade</td>
+                            <td>
+                                R$ @(item.Preco * item.Quantidade)
+                            </td>
+                            <td>
+                                <button class="btn-cancelar"
+                                        @onclick="() => RemoverProduto(item)">
+                                    X
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- RESUMO -->
+        <div class="card-vendas">
+            <h2>Resumo da Venda</h2>
+
+            <div class="grupo-input">
+                <label>Cliente</label>
+                <input @bind="cliente"
+                       placeholder="Nome do cliente" />
+            </div>
+
+            <div class="grupo-input">
+                <label>Forma de Pagamento</label>
+
+                <select @bind="formaPagamento">
+                    <option>Pix</option>
+                    <option>Dinheiro</option>
+                    <option>Cartão Débito</option>
+                    <option>Cartão Crédito</option>
+                </select>
+            </div>
+
+            <hr />
+
+            <h3>Total: R$ @TotalVenda()</h3>
+
+            <div class="botoes">
+                <button class="btn-finalizar"
+                        @onclick="FinalizarVenda">
+                    Finalizar Venda
+                </button>
+            </div>
+
+            @if (!string.IsNullOrEmpty(mensagem))
+            {
+                <p style="margin-top:15px;
+                    color:green;
+                    font-weight:bold;">
+                    @mensagem
+                </p>
+            }
+        </div>
+
+    </div>
+</div>
+
+@code {
+
+    string cliente = "";
+    string formaPagamento = "Pix";
+
+    string novoProduto = "";
+    decimal novoPreco = 0;
+    int novaQuantidade = 1;
+
+    string mensagem = "";
+
+    List<ItemVenda> itensVenda = new();
+
+    void AdicionarProduto()
+    {
+        if (!string.IsNullOrWhiteSpace(novoProduto)
+            && novoPreco > 0
+            && novaQuantidade > 0)
+        {
+            itensVenda.Add(new ItemVenda
+            {
+                Nome = novoProduto,
+                Preco = novoPreco,
+                Quantidade = novaQuantidade
+            });
+
+            novoProduto = "";
+            novoPreco = 0;
+            novaQuantidade = 1;
+        }
+    }
+
+    void RemoverProduto(ItemVenda item)
+    {
+        itensVenda.Remove(item);
+    }
+
+    void LimparVenda()
+    {
+        itensVenda.Clear();
+        cliente = "";
+        mensagem = "";
+    }
+
+    decimal TotalVenda()
+    {
+        return itensVenda.Sum(x =>
+            x.Preco * x.Quantidade);
+    }
+
+    void FinalizarVenda()
+    {
+        if (itensVenda.Count == 0)
+        {
+            mensagem =
+            "Adicione produtos antes de finalizar.";
+            return;
+        }
+
+        mensagem =
+        $"Venda finalizada com sucesso! Pagamento: {formaPagamento}";
+    }
+
+    public class ItemVenda
+    {
+        public string Nome { get; set; } = "";
+        public decimal Preco { get; set; }
+        public int Quantidade { get; set; }
+    }
+}

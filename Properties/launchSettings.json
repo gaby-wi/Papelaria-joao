@@ -6,10 +6,14 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
+<<<<<<< Updated upstream
 
       "applicationUrl": "https://localhost:60666;http://localhost:60667",
 
       "applicationUrl": "https://localhost:54308;http://localhost:54310;https://localhost:62857;http://localhost:62858;https://localhost:49208;http://localhost:49209;https://localhost:60666;http://localhost:60667"
+=======
+      "applicationUrl": "https://localhost:54308;http://localhost:54310"
+>>>>>>> Stashed changes
     }
   }
 }
