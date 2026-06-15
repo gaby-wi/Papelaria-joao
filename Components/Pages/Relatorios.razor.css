@@ -1,0 +1,63 @@
+﻿.relatorios-container {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.relatorio-card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+.relatorio-header {
+    background-color: #3d1a6e;
+    padding: 14px;
+    text-align: center;
+}
+
+    .relatorio-header h4 {
+        color: white;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: 1px;
+        font-size: 1rem;
+    }
+
+.relatorio-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .relatorio-table thead tr {
+        background-color: #6a2fa0;
+        color: white;
+        text-align: center;
+        font-size: 0.78rem;
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    .relatorio-table thead th {
+        padding: 10px 8px;
+        border: 1px solid #8a50c0;
+        color: white;
+    }
+
+    .relatorio-table tbody tr:nth-child(odd) {
+        background-color: #2a1045;
+        color: white;
+    }
+
+    .relatorio-table tbody tr:nth-child(even) {
+        background-color: #3d1a6e;
+        color: white;
+    }
+
+    .relatorio-table tbody td {
+        padding: 12px 8px;
+        border: 1px solid #5a3080;
+        text-align: center;
+        font-size: 0.85rem;
+    }
