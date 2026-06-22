@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 ﻿.container {
     max-width: 900px;
     margin: auto;
@@ -17,7 +17,7 @@ p {
     line-height: 1.6;
 }
 
-=======
+
 ﻿.home-container {
     width: 100%;
     min-height: 100vh;
@@ -123,4 +123,4 @@ p {
         gap: 20px;
     }
 }
->>>>>>> Stashed changes
+
