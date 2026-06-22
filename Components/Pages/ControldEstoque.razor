@@ -1,0 +1,166 @@
+@page "/controleestoque"
+
+<h1>Teste</h1>
+<div class="pagina">
+
+	<header class="topo">
+		<div class="logo">
+			PAPELARIA
+		</div>
+
+		<div class="busca">
+			<input type="text" placeholder="O que você está procurando" />
+		</div>
+
+		<div class="icones">
+			<span>💬</span>
+			<span>🔔</span>
+			<span>👤</span>
+		</div>
+	</header>
+
+	<div class="conteudo">
+
+		<aside class="menu">
+			<ul>
+				<li>🏠 Início</li>
+				<li>👤 Cliente</li>
+				<li>💲 Financeiro</li>
+				<li>
+					<strong>📦 Estoque</strong>
+				</li>
+				<li>📋 Relatórios</li>
+				<li>⚙️ Configurações</li>
+				<li>❓ Ajuda</li>
+			</ul>
+		</aside>
+
+		<main class="produtos">
+
+			<div class="card">
+				<h3>#1</h3>
+				<img src="https://via.placeholder.com/160" alt="Produto" />
+				<p>Caderno Kawaii</p>
+				<p>Quantidade: 32x</p>
+				<h4>BR IMPORTS</h4>
+			</div>
+
+			<div class="card">
+				<h3>#2</h3>
+				<img src="https://via.placeholder.com/160" alt="Produto" />
+				<p>Kit Escolar</p>
+				<p>Quantidade: 9x</p>
+				<h4>DUDA STORE</h4>
+			</div>
+
+			<div class="card">
+				<h3>#3</h3>
+				<img src="https://via.placeholder.com/160" alt="Produto" />
+				<p>Caderno 200 Páginas</p>
+				<p>Quantidade: 12x</p>
+				<h4>PARAMANGUE</h4>
+			</div>
+
+			<div class="card">
+				<h3>#4</h3>
+				<img src="https://via.placeholder.com/160" alt="Produto" />
+				<p>Kit Completo</p>
+				<p>Quantidade: 5x</p>
+				<h4>DONSHOP</h4>
+			</div>
+
+		</main>
+
+	</div>
+
+</div>
+
+<style>
+
+	.pagina{
+	background:#ece7f7;
+	min-height:100vh;
+	font-family:Arial, Helvetica, sans-serif;
+	}
+
+	.topo{
+	height:80px;
+	background:#4e3295;
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	padding:0 30px;
+	}
+
+	.logo{
+	color:white;
+	font-size:24px;
+	font-weight:bold;
+	}
+
+	.busca input{
+	width:500px;
+	height:40px;
+	border:2px solid #9b86d0;
+	padding-left:15px;
+	font-size:16px;
+	}
+
+	.icones{
+	color:white;
+	display:flex;
+	gap:20px;
+	font-size:24px;
+	}
+
+	.conteudo{
+	display:flex;
+	}
+
+	.menu{
+	width:220px;
+	background:#b39ddb;
+	min-height:calc(100vh - 80px);
+	}
+
+	.menu ul{
+	list-style:none;
+	padding:0;
+	margin:0;
+	}
+
+	.menu li{
+	padding:25px;
+	font-size:18px;
+	}
+
+	.produtos{
+	flex:1;
+	padding:30px;
+	display:grid;
+	grid-template-columns:repeat(4,1fr);
+	gap:30px;
+	}
+
+	.card{
+	text-align:center;
+	}
+
+	.card img{
+	width:160px;
+	height:160px;
+	object-fit:cover;
+	border:8px solid #b39ddb;
+	border-radius:6px;
+	}
+
+	.card p{
+	color:#6f59c5;
+	margin:5px;
+	}
+
+	.card h4{
+	color:#6f59c5;
+	}
+
+</style>

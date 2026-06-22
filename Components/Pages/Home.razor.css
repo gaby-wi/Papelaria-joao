@@ -1,0 +1,126 @@
+<<<<<<< Updated upstream
+﻿.container {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+    color:beige;
+}
+
+h1 {
+    color: #C287DE;
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 40px;
+    line-height: 1.6;
+}
+
+=======
+﻿.home-container {
+    width: 100%;
+    min-height: 100vh;
+    background: #f4edff;
+    padding: 30px;
+}
+
+/* BANNER */
+.banner-home {
+    background: linear-gradient(90deg,#c8a2ff,#9d63ff);
+    border-radius: 25px;
+    padding: 35px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    box-shadow: 0 8px 25px rgba(120,81,169,0.2);
+}
+
+    .banner-home h1 {
+        font-size: 35px;
+        margin-bottom: 10px;
+    }
+
+    .banner-home p {
+        font-size: 17px;
+        opacity: 0.95;
+    }
+
+.emoji {
+    font-size: 90px;
+}
+
+/* CARDS */
+.cards-home {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card-home {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    text-decoration: none;
+    color: #5d4d75;
+    box-shadow: 0 8px 25px rgba(120,81,169,0.15);
+    transition: .3s;
+}
+
+    .card-home:hover {
+        transform: translateY(-8px);
+    }
+
+.icone-card {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.card-home h2 {
+    color: #7b3fe4;
+    margin-bottom: 8px;
+}
+
+/* RESUMO */
+.resumo-home {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+
+.mini-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(120,81,169,0.15);
+}
+
+    .mini-card h3 {
+        color: #7b3fe4;
+        margin-bottom: 10px;
+    }
+
+    .mini-card span {
+        font-size: 28px;
+        font-weight: bold;
+        color: #5d4d75;
+    }
+
+/* RESPONSIVO */
+@media(max-width:900px) {
+
+    .cards-home,
+    .resumo-home {
+        grid-template-columns: 1fr;
+    }
+
+    .banner-home {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+}
+>>>>>>> Stashed changes
