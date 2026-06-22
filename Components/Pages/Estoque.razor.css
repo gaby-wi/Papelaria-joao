@@ -1,172 +1,147 @@
-
-
-body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#ece7f7;
-}
-
-.estoque-container{
-    width:100%;
-    height:100vh;
+.estoque-container {
+	width: 100%;
+	min-height: 100vh;
+	background-color: #f2eefb;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 /* TOPO */
 
-.topbar{
-    height:90px;
-    background:#4e3294;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 30px;
+.topbar {
+	height: 90px;
+	background-color: #4d2f91;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 30px;
 }
 
-.logo-area{
-    display:flex;
-    align-items:center;
-    gap:20px;
+.logo-area {
+	display: flex;
+	align-items: center;
+	gap: 20px;
 }
 
-.menu-btn{
-    font-size:28px;
-    color:white;
-    cursor:pointer;
+.logo {
+	width: 70px;
+	height: auto;
 }
 
-.logo{
-    width:70px;
+.menu-btn {
+	color: white;
+	font-size: 28px;
+	cursor: pointer;
 }
 
-.search-box{
-    width:50%;
-    background:white;
-    border:2px solid #7b63b4;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:10px 20px;
+.search-box {
+	width: 50%;
+	background: white;
+	border: 2px solid #9b87d5;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 20px;
 }
 
-.search-box input{
-    width:100%;
-    border:none;
-    outline:none;
-    font-size:18px;
-}
+	.search-box input {
+		width: 100%;
+		border: none;
+		outline: none;
+		font-size: 16px;
+	}
 
-.top-icons{
-    display:flex;
-    gap:25px;
-    color:white;
-    font-size:28px;
-}
-
-/* CORPO */
-
-.main-content{
-    display:flex;
-    height:calc(100vh - 90px);
-}
-
-/* MENU */
-
-.sidebar{
-    width:220px;
-    background:#b9a2ef;
-    display:flex;
-    flex-direction:column;
-    padding-top:30px;
-}
-
-.sidebar a{
-    text-decoration:none;
-    color:#38236d;
-    padding:20px 30px;
-    font-size:22px;
-    font-weight:500;
-}
-
-.sidebar a:hover{
-    background:#a18be4;
-}
-
-.sidebar .active{
-    font-weight:bold;
+.top-icons {
+	display: flex;
+	gap: 25px;
+	color: white;
+	font-size: 24px;
 }
 
 /* CONTEÚDO */
 
-.estoque-content{
-    flex:1;
-    background:#f2eefb;
-    padding:30px;
+.estoque-content {
+	padding: 40px;
 }
 
-.produtos-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:40px;
+/* GRID */
+
+.produtos-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 45px;
 }
 
-.produto-card{
-    text-align:center;
+/* CARD */
+
+.produto-card {
+	text-align: center;
 }
 
-.produto-card img{
-    width:180px;
-    height:150px;
-    object-fit:cover;
-    border:8px solid #c8b5f2;
-    border-radius:6px;
-}
+	.produto-card h3 {
+		margin-bottom: 10px;
+		color: #222;
+	}
 
-.produto-card h3{
-    color:#222;
-}
+	.produto-card img {
+		width: 180px;
+		height: 180px;
+		object-fit: cover;
+		border: 8px solid #c8b5f2;
+		border-radius: 6px;
+		background: white;
+	}
 
-.produto-card p{
-    color:#6c4fc7;
-    margin:10px 0 5px;
-}
+	.produto-card p {
+		margin-top: 12px;
+		margin-bottom: 4px;
+		color: #6b58bf;
+		font-size: 15px;
+	}
 
-.produto-card span{
-    color:#6c4fc7;
-    display:block;
-}
+	.produto-card span {
+		color: #6b58bf;
+		font-size: 15px;
+		display: block;
+	}
 
-.produto-card h4{
-    color:#6c4fc7;
-    margin-top:10px;
-}
+	.produto-card h4 {
+		margin-top: 10px;
+		color: #6b58bf;
+		font-size: 22px;
+		font-weight: bold;
+	}
 
 /* RESPONSIVO */
 
-@media(max-width:1200px){
-
-    .produtos-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
+@media (max-width: 1200px) {
+	.produtos-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
 
-@media(max-width:900px){
+@media (max-width: 900px) {
+	.produtos-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
 
-    .produtos-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .sidebar{
-        width:180px;
-    }
+	.search-box {
+		width: 60%;
+	}
 }
 
-@media(max-width:600px){
+@media (max-width: 600px) {
+	.produtos-grid {
+		grid-template-columns: 1fr;
+	}
 
-    .produtos-grid{
-        grid-template-columns:1fr;
-    }
+	.topbar {
+		flex-direction: column;
+		height: auto;
+		padding: 15px;
+		gap: 15px;
+	}
 
-    .sidebar{
-        display:none;
-    }
+	.search-box {
+		width: 100%;
+	}
 }

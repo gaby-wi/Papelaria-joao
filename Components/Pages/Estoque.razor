@@ -1,89 +1,67 @@
-@page "/estoque"
+<div class="produtos-grid">
 
-<div class="estoque-container">
-
-    <!-- Topo -->
-    <div class="topbar">
-        <div class="logo-area">
-            <span class="menu-btn">☰</span>
-            <img src="images/logo.png" class="logo" />
-        </div>
-
-        <div class="search-box">
-            <input type="text" placeholder="Que você está procurando" />
-            <span>🔍</span>
-        </div>
-
-        <div class="top-icons">
-            <span>💬</span>
-            <span>🔔</span>
-            <span>👤</span>
-        </div>
+    <div class="produto-card">
+        <h3>#1</h3>
+        <img src="LINK_DA_IMAGEM_1" alt="Produto 1" />
+        <p>Caderno Kawaii 200 Pg 10 Matérias</p>
+        <span>Quantidade: 32x</span>
+        <h4>BR IMPORTS</h4>
     </div>
 
-    <div class="main-content">
+    <div class="produto-card">
+        <h3>#2</h3>
+        <img src="LINK_DA_IMAGEM_2" alt="Produto 2" />
+        <p>Kit Escolar Canetas Estilo Desenho</p>
+        <span>Quantidade: 9x</span>
+        <h4>DUDA STORE</h4>
+    </div>
 
-        <!-- Menu -->
-        <div class="sidebar">
+    <div class="produto-card">
+        <h3>#3</h3>
+        <img src="LINK_DA_IMAGEM_3" alt="Produto 3" />
+        <p>Caderno Kawaii 200 Pg 10 Matérias</p>
+        <span>Quantidade: 12x</span>
+        <h4>PARAMANGUE</h4>
+    </div>
 
-            <a href="#">
-                🏠 Início
-            </a>
+    <div class="produto-card">
+        <h3>#4</h3>
+        <img src="LINK_DA_IMAGEM_4" alt="Produto 4" />
+        <p>Kit Escolar Completo</p>
+        <span>Quantidade: 5x</span>
+        <h4>DONSHOP</h4>
+    </div>
 
-            <a href="#">
-                👤 Cliente
-            </a>
+    <div class="produto-card">
+        <h3>#5</h3>
+        <img src="LINK_DA_IMAGEM_5" alt="Produto 5" />
+        <p>Estojo Moranguinho</p>
+        <span>Quantidade: 23x</span>
+        <h4>ABC PAPERS</h4>
+    </div>
 
-            <a href="#">
-                💲 Financeiro
-            </a>
+    <div class="produto-card">
+        <h3>#6</h3>
+        <img src="LINK_DA_IMAGEM_6" alt="Produto 6" />
+        <p>Caderno Dark Side 100 Pg</p>
+        <span>Quantidade: 59x</span>
+        <h4>METEORS</h4>
+    </div>
 
-            <a href="#" class="active">
-                🛒 Estoque
-            </a>
+    <div class="produto-card">
+        <h3>#7</h3>
+        <img src="LINK_DA_IMAGEM_7" alt="Produto 7" />
+        <p>Caneta Luxo Unicórnio</p>
+        <span>Quantidade: 64x</span>
+        <h4>FLOY SHOP</h4>
+    </div>
 
-            <a href="#">
-                📋 Relatórios
-            </a>
-
-            <a href="#">
-                ⚙️ Configurações
-            </a>
-
-            <a href="#">
-                ❓ Ajuda
-            </a>
-
-        </div>
-
-        <!-- Conteúdo -->
-        <div class="estoque-content">
-
-            <div class="produtos-grid">
-
-                @for (int i = 1; i <= 8; i++)
-                {
-                    <div class="produto-card">
-
-                        <h3>#@i</h3>
-
-                        <img src="https://via.placeholder.com/180x150"
-                             alt="Produto" />
-
-                        <p>Nome do Produto</p>
-
-                        <span>Quantidade: @(i * 8)x</span>
-
-                        <h4>FORNECEDOR</h4>
-
-                    </div>
-                }
-
-            </div>
-
-        </div>
-
+    <div class="produto-card">
+        <h3>#8</h3>
+        <img src="LINK_DA_IMAGEM_8" alt="Produto 8" />
+        <p>Estojo Minimalista Preto e Branco</p>
+        <span>Quantidade: 21x</span>
+        <h4>DANI BUY</h4>
     </div>
 
 </div>
-
