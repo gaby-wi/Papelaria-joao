@@ -85,7 +85,7 @@ body {
             border-color: #9d63ff;
         }
 
-.botoes {
+botoes {
     display: flex;
     gap: 15px;
     margin-top: 20px;
