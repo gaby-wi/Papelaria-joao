@@ -1,0 +1,89 @@
+@page "/estoque"
+
+<div class="estoque-container">
+
+    <!-- Topo -->
+    <div class="topbar">
+        <div class="logo-area">
+            <span class="menu-btn">☰</span>
+            <img src="images/logo.png" class="logo" />
+        </div>
+
+        <div class="search-box">
+            <input type="text" placeholder="Que você está procurando" />
+            <span>🔍</span>
+        </div>
+
+        <div class="top-icons">
+            <span>💬</span>
+            <span>🔔</span>
+            <span>👤</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <!-- Menu -->
+        <div class="sidebar">
+
+            <a href="#">
+                🏠 Início
+            </a>
+
+            <a href="#">
+                👤 Cliente
+            </a>
+
+            <a href="#">
+                💲 Financeiro
+            </a>
+
+            <a href="#" class="active">
+                🛒 Estoque
+            </a>
+
+            <a href="#">
+                📋 Relatórios
+            </a>
+
+            <a href="#">
+                ⚙️ Configurações
+            </a>
+
+            <a href="#">
+                ❓ Ajuda
+            </a>
+
+        </div>
+
+        <!-- Conteúdo -->
+        <div class="estoque-content">
+
+            <div class="produtos-grid">
+
+                @for (int i = 1; i <= 8; i++)
+                {
+                    <div class="produto-card">
+
+                        <h3>#@i</h3>
+
+                        <img src="https://via.placeholder.com/180x150"
+                             alt="Produto" />
+
+                        <p>Nome do Produto</p>
+
+                        <span>Quantidade: @(i * 8)x</span>
+
+                        <h4>FORNECEDOR</h4>
+
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
