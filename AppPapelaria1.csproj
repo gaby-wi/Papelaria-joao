@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Components\Pages\CadastrarProduto.razor.razor" />
     <Content Remove="Components\Pages\Painel Principal.razor" />
+    <Content Remove="Components\Pages\RegistroVendas.razor.razor" />
   </ItemGroup>
 
 </Project>

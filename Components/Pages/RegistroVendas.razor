@@ -1,7 +1,98 @@
 ﻿@page "/registrovendas"
 
+<PageTitle>Registro de </PageTitle>
+
 <h3>RegistroVendas</h3>
 
+<div class="home-container">
+
+    <div class="container">
+
+        <h1>Registro de Vendas</h1>
+
+        <div>
+            <label>Código da Venda:</label><br />
+            <input type="text" @bind="codigoVenda" />
+        </div>
+
+        <br />
+
+        <div>
+            <label>Nome do Cliente:</label><br />
+            <input type="text" @bind="cliente" />
+        </div>
+
+        <br />
+
+        <div>
+            <label>Produto:</label><br />
+            <input type="text" @bind="produto" />
+        </div>
+
+        <br />
+
+        <div>
+            <label>Quantidade:</label><br />
+            <input type="number" @bind="quantidade" />
+        </div>
+
+        <br />
+
+        <div>
+            <label>Valor Unitário (R$):</label><br />
+            <input type="number" @bind="valorUnitario" />
+        </div>
+
+        <br />
+
+        <div>
+            <label>Forma de Pagamento:</label><br />
+            <select @bind="formaPagamento">
+                <option>Dinheiro</option>
+                <option>Pix</option>
+                <option>Cartão de Débito</option>
+                <option>Cartão de Crédito</option>
+            </select>
+        </div>
+
+        <br />
+
+        <div>
+            <label>Observações:</label><br />
+            <textarea @bind="observacao"></textarea>
+        </div>
+
+        <br />
+
+        <button @onclick="RegistrarVenda">
+            Registrar Venda
+        </button>
+
+        @if (!string.IsNullOrEmpty(mensagem))
+        {
+            <h3>@mensagem</h3>
+        }
+
+    </div>
+
+</div>
+
 @code {
+
+    string codigoVenda = "";
+    string cliente = "";
+    string produto = "";
+    int quantidade;
+    decimal valorUnitario;
+    string formaPagamento = "";
+    string observacao = "";
+    string mensagem = "";
+
+    void RegistrarVenda()
+    {
+        decimal total = quantidade * valorUnitario;
+
+        mensagem = $"Venda registrada com sucesso! Valor Total: R$ {total:F2}";
+    }
 
 }
