@@ -1,6 +1,8 @@
-﻿@page "/login"
+﻿<!-- Tela de autenticação do usuário -->
+@page "/login"
 @inject NavigationManager NavigationManager
 
+<!-- Campo de usuário -->
 <div class="login-container">
     <div class="login-card shadow-lg">
         <div class="login-header text-center">
@@ -19,6 +21,7 @@
                     <input type="email" class="form-control" id="email" placeholder="admin@papelaria.com" required @bind="loginEmail" />
                 </div>
             </div>
+            <!-- Campo de senha -->
             <div class="mb-4">
                 <label for="password" class="form-label">Senha</label>
                 <div class="input-group">
@@ -26,6 +29,7 @@
                     <input type="password" class="form-control" id="password" placeholder="••••••••" required @bind="loginPassword" />
                 </div>
             </div>
+            <!-- Botão para entrar no sistema -->
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary btn-lg shadow-sm">Entrar</button>
             </div>

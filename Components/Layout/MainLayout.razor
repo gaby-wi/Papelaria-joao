@@ -1,11 +1,13 @@
-﻿@inherits LayoutComponentBase
+﻿<!-- Layout principal utilizado por todas as páginas -->
+@inherits LayoutComponentBase
 
 <div class="page">
-
+    <!-- Menu de navegação -->
     <div class="sidebar">
         <NavMenu />
     </div>
 
+    <!-- Conteúdo da página selecionada -->
     <main class="main-content">
         <article class="content px-4">
             @Body
