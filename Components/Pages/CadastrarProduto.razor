@@ -1,11 +1,17 @@
 ﻿<!-- Formulário para cadastro de novos produtos -->
 @page "/cadastroproduto"
+@inject IJSRuntime JS
 
 <PageTitle>Cadastro de Produtos</PageTitle>
 
 <div class="home-container">
 
     <div class="container">
+
+        <!-- Botão para voltar -->
+        <button class="btn-voltar" @onclick="VoltarPagina">
+            ←
+        </button>
 
         <h1>Cadastro de Produtos</h1>
 
@@ -91,5 +97,11 @@
     void CadastroProduto()
     {
         mensagem = $"Produto '{nome}' cadastrado com sucesso!";
+    }
+
+    // Método para voltar à página anterior
+    private async Task VoltarPagina()
+    {
+        await JS.InvokeVoidAsync("history.back");
     }
 }

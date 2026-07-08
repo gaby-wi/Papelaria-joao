@@ -43,3 +43,26 @@ h3 {
     text-align: center;
     margin-top: 20px;
 }
+
+.btn-voltar {
+    background: transparent;
+    border: none;
+    color: #5f6368;
+    font-size: 35px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+    .btn-voltar:hover {
+        background-color: #e8eaed;
+    }
+
+    .btn-voltar:active {
+        background-color: #dadce0;
+    }
