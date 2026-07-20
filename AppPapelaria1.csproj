@@ -8,12 +8,9 @@
 
   <ItemGroup>
     <Content Remove="Components\Pages\CadastrarProduto.razor.razor" />
+    <Content Remove="Components\Pages\CadastroFornecedor.razor.razor" />
     <Content Remove="Components\Pages\Painel Principal.razor" />
     <Content Remove="Components\Pages\RegistroVendas.razor.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Components\Pages\CadastroEstoque.razor.css" />
   </ItemGroup>
 
 </Project>

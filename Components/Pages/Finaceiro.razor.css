@@ -1,0 +1,185 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+}
+
+header {
+    background: #1976d2;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.container {
+    width: 95%;
+    margin: 25px auto;
+}
+
+/* Cards */
+
+.cards {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.card {
+    flex: 1;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,.2);
+}
+
+    .card h3 {
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+.receita {
+    background: #2ecc71;
+}
+
+.despesa {
+    background: #e74c3c;
+}
+
+.lucro {
+    background: #3498db;
+}
+
+.caixa {
+    background: #9b59b6;
+}
+
+/* Filtros */
+
+.filtros {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    margin-bottom: 30px;
+}
+
+    .filtros h2 {
+        margin-bottom: 15px;
+    }
+
+.inputs {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+input, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+.btnPesquisar {
+    background: #1976d2;
+}
+
+.btnLimpar {
+    background: #7f8c8d;
+}
+
+/* Tabela */
+
+.tabela {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th {
+    background: #1976d2;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background: #f2f2f2;
+}
+
+/* Botões */
+
+.acoes {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.novaReceita {
+    background: #27ae60;
+}
+
+.novaDespesa {
+    background: #c0392b;
+}
+
+.pdf {
+    background: #e67e22;
+}
+
+.excel {
+    background: #16a085;
+}
+
+.caixaBtn {
+    background: #8e44ad;
+}
+
+.resumo {
+    margin-top: 35px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+}
+
+    .resumo h2 {
+        margin-bottom: 15px;
+    }
+
+    .resumo p {
+        margin: 10px 0;
+        font-size: 18px;
+    }

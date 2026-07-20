@@ -1,7 +1,140 @@
-﻿<!-- Página responsável pelo controle financeiro -->
-<h3>Finaceiro</h3>
+﻿@page "/financeiro"
+@inject IJSRuntime JS
 
-<!-- Exibe receitas e despesas -->
+<PageTitle>Financeiro</PageTitle>
+
+<div class="home-container">
+
+    <div class="container">
+
+        <!-- Botão para voltar -->
+        <button class="btn-voltar" @onclick="VoltarPagina">
+            ←
+        </button>
+
+        <h1>Financeiro</h1>
+
+        <!-- Tipo de movimentação -->
+        <div>
+            <label>Tipo de Movimentação:</label><br />
+            <select @bind="tipo">
+                <option>Entrada</option>
+                <option>Saída</option>
+            </select>
+        </div>
+
+        <br />
+
+        <!-- Descrição -->
+        <div>
+            <label>Descrição:</label><br />
+            <input type="text" @bind="descricao" />
+        </div>
+
+        <br />
+
+        <!-- Valor -->
+        <div>
+            <label>Valor (R$):</label><br />
+            <input type="number" step="0.01" @bind="valor" />
+        </div>
+
+        <br />
+
+        <!-- Forma de pagamento -->
+        <div>
+            <label>Forma de Pagamento:</label><br />
+            <select @bind="formaPagamento">
+                <option>Dinheiro</option>
+                <option>Pix</option>
+                <option>Cartão de Crédito</option>
+                <option>Cartão de Débito</option>
+                <option>Boleto</option>
+            </select>
+        </div>
+
+        <br />
+
+        <!-- Data -->
+        <div>
+            <label>Data:</label><br />
+            <input type="date" @bind="data" />
+        </div>
+
+        <br />
+
+        <!-- Observações -->
+        <div>
+            <label>Observações:</label><br />
+            <textarea @bind="observacao"></textarea>
+        </div>
+
+        <br />
+
+        <!-- Botão -->
+        <button @onclick="CadastrarMovimentacao">
+            Salvar Movimentação
+        </button>
+
+        @if (!string.IsNullOrEmpty(mensagem))
+        {
+            <h3>@mensagem</h3>
+        }
+
+        <hr />
+
+        <h2>Resumo Financeiro</h2>
+
+        <p><strong>Receitas:</strong> R$ @totalReceitas.ToString("F2")</p>
+        <p><strong>Despesas:</strong> R$ @totalDespesas.ToString("F2")</p>
+        <p><strong>Saldo:</strong> R$ @saldo.ToString("F2")</p>
+
+    </div>
+
+</div>
+
 @code {
+
+    string tipo = "Entrada";
+    string descricao = "";
+    decimal valor;
+    string formaPagamento = "Dinheiro";
+    DateTime data = DateTime.Today;
+    string observacao = "";
+
+    string mensagem = "";
+
+    decimal totalReceitas = 0;
+    decimal totalDespesas = 0;
+    decimal saldo = 0;
+
+    void CadastrarMovimentacao()
+    {
+        if (tipo == "Entrada")
+        {
+            totalReceitas += valor;
+        }
+        else
+        {
+            totalDespesas += valor;
+        }
+
+        saldo = totalReceitas - totalDespesas;
+
+        mensagem = $"{tipo} cadastrada com sucesso!";
+
+        // Limpa os campos
+        descricao = "";
+        valor = 0;
+        observacao = "";
+        formaPagamento = "Dinheiro";
+        tipo = "Entrada";
+        data = DateTime.Today;
+    }
+
+    private async Task VoltarPagina()
+    {
+        await JS.InvokeVoidAsync("history.back");
+    }
 
 }
