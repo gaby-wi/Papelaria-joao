@@ -12,4 +12,8 @@
     <Content Remove="Components\Pages\RegistroVendas.razor.razor" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Components\Pages\CadastroEstoque.razor.css" />
+  </ItemGroup>
+
 </Project>
