@@ -1,4 +1,4 @@
-﻿namespace AppPapelaria1.Components.Pages.Model
+﻿namespace AppPapelaria1.Model
 {
     public class Processo
     {

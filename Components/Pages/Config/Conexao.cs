@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 
-namespace AppPapelaria1.config
+namespace AppPapelaria1.Config
 {
     public class Conexao
     {
