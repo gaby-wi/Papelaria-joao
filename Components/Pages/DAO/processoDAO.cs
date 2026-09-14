@@ -6,7 +6,7 @@ using AppPapelaria1.Model;
     public class processoDAO
     {
         private readonly Conexao _conexao;
-        public ProcessoDAO(Conexao conexao)
+        public processoDAO(Conexao conexao)
         {
             _conexao = conexao;
         }
