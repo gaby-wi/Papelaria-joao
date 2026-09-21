@@ -1,9 +1,7 @@
 ﻿namespace AppPapelaria1.DAO;
 using AppPapelaria1.Config;
 using AppPapelaria1.Model;
-
-
-    public class ProcessoDAO { }
+public class ProcessoDAO { }
 
 public class processoDAO
 {
