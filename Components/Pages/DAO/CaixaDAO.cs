@@ -1,4 +1,4 @@
-﻿namespace AppPapelaria1.DAO;
+﻿@namespace AppPapelaria1.DAO;
 
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,8 @@ public class CaixaDAO
         _conexao = conexao;
     }
 
-    public List<Caixa> Listar()
+   
+  public List<Caixa> Listar()
     {
         try
         {

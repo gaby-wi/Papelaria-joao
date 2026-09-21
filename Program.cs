@@ -1,5 +1,5 @@
-using AppPapelaria1.Components;
-{ }
+using AppPapelaria1;
+using Google.Protobuf.WellKnownTypes;
 
 // Cria e configura a aplicação Blazor
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +21,6 @@ if (!app.Environment.IsDevelopment())
 
 // Proteção contra ataques CSRF
 app.UseHttpsRedirection();
-
 
 app.UseAntiforgery();
 
