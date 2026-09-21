@@ -1,5 +1,72 @@
-﻿<h3>Cliente</h3>
+﻿@page "/cliente"
+
+<h3>Cadastro de Clientes</h3>
+
+<div class="card p-4 mt-3">
+
+    <div class="mb-3">
+        <label>Nome:</label>
+        <input class="form-control" @bind="nome" placeholder="Digite o nome do cliente" />
+    </div>
+
+    <div class="mb-3">
+        <label>CPF:</label>
+        <input class="form-control" @bind="cpf" placeholder="Digite o CPF" />
+    </div>
+
+    <div class="mb-3">
+        <label>Telefone:</label>
+        <input class="form-control" @bind="telefone" placeholder="Digite o telefone" />
+    </div>
+
+    <div class="mb-3">
+        <label>E-mail:</label>
+        <input class="form-control" @bind="email" placeholder="Digite o e-mail" />
+    </div>
+
+    <div class="mb-3">
+        <label>Endereço:</label>
+        <input class="form-control" @bind="endereco" placeholder="Digite o endereço" />
+    </div>
+
+    <button class="btn btn-primary" @onclick="Cadastrar">
+        Cadastrar Cliente
+    </button>
+
+</div>
+
+@if (mensagem != "")
+{
+    <div class="alert alert-success mt-3">
+        @mensagem
+    </div>
+}
 
 @code {
+
+    string nome = "";
+    string cpf = "";
+    string telefone = "";
+    string email = "";
+    string endereco = "";
+
+    string mensagem = "";
+
+    void Cadastrar()
+    {
+        if (nome == "" || cpf == "" || telefone == "")
+        {
+            mensagem = "Preencha os campos obrigatórios.";
+            return;
+        }
+
+        mensagem = "Cliente cadastrado com sucesso!";
+
+        nome = "";
+        cpf = "";
+        telefone = "";
+        email = "";
+        endereco = "";
+    }
 
 }
