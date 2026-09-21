@@ -1,6 +1,5 @@
 ﻿using AppPapelaria1.Config;
 using AppPapelaria1.Model;
-using Microsoft.AspNetCore.Http.HttpResults;
 using static Mysqlx.Expect.Open.Types.Condition.Types;
 
 
@@ -26,7 +25,7 @@ namespace AppPapelaria1.Components.Pages.DAO
                 using var con = _conexao.GetConnectionFornecedor();
 
 
-                string sql = "SELECT * FROM processos";
+                string sql = "SELECT * FROM fornecedor";
                 using var comando = con.CreateCommand();
                 comando.CommandText = sql;
 

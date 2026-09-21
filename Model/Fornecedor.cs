@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using static Mysqlx.Expect.Open.Types.Condition.Types;
-
-namespace AppPapelaria1.Components.Pages.Model
+﻿namespace AppPapelaria1.Model
 {
     public class Fornecedor
     {
