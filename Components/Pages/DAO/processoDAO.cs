@@ -2,7 +2,6 @@
 using AppPapelaria1.Config;
 using AppPapelaria1.Model;
 
-{
     public class processoDAO
     {
         private readonly Conexao _conexao;
@@ -50,4 +49,4 @@ using AppPapelaria1.Model;
             }
         }
     }
-}
+
