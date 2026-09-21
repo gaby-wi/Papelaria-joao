@@ -12,6 +12,6 @@
 
         public string Descricao { get; set; } = string.Empty;
 
-        public string Observacoes { get; set; } = "aberto";
+        public string Situacao { get; set; } = "aberto";
     }
 }

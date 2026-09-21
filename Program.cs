@@ -1,5 +1,6 @@
 using AppPapelaria1;
-using Google.Protobuf.WellKnownTypes;
+using AppPapelaria1.Config;
+using AppPapelaria1.DAO;
 
 // Cria e configura a aplicação Blazor
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Adiciona os componentes Razor e habilita a interatividade
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+////configuração da conexão com o banco de dados MYSQL
+builder.Services.AddScoped<Conexao>();
+builder.Services.AddScoped<ProcessoDAO>();
+builder.Services.AddScoped<FornecedorDAO>();
+
 
 // Cria a aplicação
 var app = builder.Build();
@@ -30,3 +37,5 @@ app.MapRazorComponents<App>()
 
 // Inicializa a aplicação
 app.Run();
+
+

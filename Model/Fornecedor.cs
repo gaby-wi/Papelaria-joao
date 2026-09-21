@@ -12,7 +12,7 @@
 
         public string Categoria { get; set; } = string.Empty;
 
-        public string Observações { get; set; } = string.Empty;
+        public string Observacoes { get; set; } = string.Empty;
 
     }
 }
