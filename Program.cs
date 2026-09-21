@@ -1,7 +1,8 @@
 using AppPapelaria1.Components;
+{ }
 
 // Cria e configura a aplicação Blazor
-var builder = WebApplication.CreateBuilder(args); 
+var builder = WebApplication.CreateBuilder(args);
 
 // Adiciona os componentes Razor e habilita a interatividade
 builder.Services.AddRazorComponents()
