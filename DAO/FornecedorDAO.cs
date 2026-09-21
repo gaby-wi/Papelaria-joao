@@ -1,10 +1,11 @@
-﻿using AppPapelaria1.Config;
+﻿using AppPapelaria1.Components.Pages;
+using AppPapelaria1.Config;
 using AppPapelaria1.Model;
 using static Mysqlx.Expect.Open.Types.Condition.Types;
 
 
 
-namespace AppPapelaria1.Components.Pages.DAO
+namespace AppPapelaria1.DAO
 {
     public class FornecedorDAO
     {

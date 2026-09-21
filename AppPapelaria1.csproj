@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Components\Pages\DAO\CaixaDAO.cs" />
+    <Compile Remove="DAO\CaixaDAO.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Components\Pages\DAO\CaixaDAO.cs" />
+    <Content Include="DAO\CaixaDAO.cs" />
   </ItemGroup>
 
   <ItemGroup>
