@@ -1,11 +1,11 @@
-﻿using AppPapelaria1.Config;
+﻿
+using AppPapelaria1.Config;
 using AppPapelaria1.Model;
-using static Mysqlx.Expect.Open.Types.Condition.Types;
+namespace AppPapelaria1.DAO;
 
 
 
-namespace AppPapelaria1.Components.Pages.DAO
-{
+
     public class FornecedorDAO
     {
         private readonly Conexao _conexao;
@@ -57,4 +57,4 @@ namespace AppPapelaria1.Components.Pages.DAO
             }
         }
     }
-}
+

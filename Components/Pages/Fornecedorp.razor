@@ -1,4 +1,5 @@
 ﻿@page "/fornecedor"
+@inject FornecedorDAO FornecedorP
 
 <div class="container">
 
@@ -89,44 +90,14 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-
-                <tbody>
-
+                @foreach(var forn in Fornecedor)
+                {
                     <tr>
-                        <td>PapelMax</td>
-                        <td>Papelaria</td>
-
-                        <td>
-                            <span class="status">
-                                Ativo
-                            </span>
-                        </td>
+                        <td>@FornecedorP.Nome</td>
+                        <td>@Fornecedor.Categoria</td>
+                        <td>@Fornecedor.Observacoes</td>
                     </tr>
-
-                    <tr>
-                        <td>TechOffice</td>
-                        <td>Informática</td>
-
-                        <td>
-                            <span class="status">
-                                Ativo
-                            </span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Arte & Cor</td>
-                        <td>Artes</td>
-
-                        <td>
-                            <span class="status">
-                                Ativo
-                            </span>
-                        </td>
-                    </tr>
-
-                </tbody>
-
+                }
             </table>
 
         </div>
@@ -134,3 +105,6 @@
     </div>
 
 </div>
+@code {
+    private List<AppPapelaria1.Model.Fornecedor> Fornecedor { get; set; } = [];
+}

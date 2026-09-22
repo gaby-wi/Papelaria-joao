@@ -32,5 +32,11 @@ namespace AppPapelaria1.Config
             conn ??= GetConnection();
             return new MySqlCommand(query, conn);
         }
+
+        public MySqlCommand CreateCommandFornecedor(string query, MySqlConnection? conn = null)
+        {
+            conn ??= GetConnectionFornecedor();
+            return new MySqlCommand(query, conn);
+        }
     }
 }
