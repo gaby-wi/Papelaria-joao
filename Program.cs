@@ -1,32 +1,34 @@
 using AppPapelaria1;
-using Google.Protobuf.WellKnownTypes;
+using AppPapelaria1.Components;
+using AppPapelaria1.Components.Pages.DAO;
+using AppPapelaria1.Config;
+using AppPapelaria1.DAO;
 
-// Cria e configura a aplicação Blazor
 var builder = WebApplication.CreateBuilder(args);
 
-// Adiciona os componentes Razor e habilita a interatividade
+// Adiciona serviços do Blazor
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Cria a aplicação
+// Registra a Conexão e os DAOs
+builder.Services.AddScoped<Conexao>();
+builder.Services.AddScoped<CaixaDAO>();
+builder.Services.AddScoped<FornecedorDAO>();
+builder.Services.AddScoped<processoDAO>();
+
 var app = builder.Build();
 
-// Configura tratamento de erros em ambiente de produção
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-// Proteção contra ataques CSRF
 app.UseHttpsRedirection();
-
 app.UseAntiforgery();
-
 app.MapStaticAssets();
+
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-// Inicializa a aplicação
 app.Run();
