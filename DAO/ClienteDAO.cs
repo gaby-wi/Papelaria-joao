@@ -1,38 +1,51 @@
-﻿using MySql.Data.MySqlClient;
+﻿using AppPapelaria1.Config;
 using AppPapelaria1.Model;
-using AppPapelaria1.Config;
 
-namespace AppPapelaria1.DAO
+namespace AppPapelaria1.DAO;
+
+public class ClienteDAO
 {
-    public class ClienteDAO
+    private readonly Conexao _conexao;
+
+    public ClienteDAO(Conexao conexao)
     {
-        private Conexao conexao;
+        _conexao = conexao;
+    }
 
-        public ClienteDAO(Conexao conexao)
+    public List<Cliente> Listar()
+    {
+        try
         {
-            this.conexao = conexao;
-        }
+            var lista = new List<Cliente>();
 
-        public void Cadastrar(Cliente cliente)
-        {
-            string sql = @"INSERT INTO cliente
-                           (nome_cli, cpf_cli, telefone_cli, email_cli, endereco_cli)
-                           VALUES
-                           (@nome, @cpf, @telefone, @email, @endereco)";
+            // Buscando a Conexão com o banco de dados
+            using var con = _conexao.GetConnection();
 
-            using (MySqlConnection conexaoBanco = conexao.GetConnection())
+            string sql = "SELECT * FROM clientes";
+            using var comando = con.CreateCommand();
+            comando.CommandText = sql;
+
+            using var leitor = comando.ExecuteReader();
+
+            while (leitor.Read())
             {
-                using (MySqlCommand comando = new MySqlCommand(sql, conexaoBanco))
-                {
-                    comando.Parameters.AddWithValue("@nome", cliente.NomeCli);
-                    comando.Parameters.AddWithValue("@cpf", cliente.CpfCli);
-                    comando.Parameters.AddWithValue("@telefone", cliente.TelefoneCli);
-                    comando.Parameters.AddWithValue("@email", cliente.EmailCli);
-                    comando.Parameters.AddWithValue("@endereco", cliente.EnderecoCli);
+                var cliente = new Cliente();
 
-                    comando.ExecuteNonQuery();
-                }
+                cliente.Id = leitor.GetInt32("id");
+                cliente.Nome = leitor.GetString("nome");
+                cliente.CPF = leitor.GetString("cpf");
+                cliente.Telefone = leitor.GetString("telefone");
+                cliente.Email = leitor.GetString("email");
+                cliente.Endereco = leitor.GetString("endereco");
+
+                lista.Add(cliente);
             }
+
+            return lista;
+        }
+        catch
+        {
+            throw;
         }
     }
 }

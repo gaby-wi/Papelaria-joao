@@ -1,17 +1,11 @@
-﻿namespace AppPapelaria1.Model
+﻿namespace AppPapelaria1.Model;
+
+public class Cliente
 {
-    public class Cliente
-    {
-        public int IdCli { get; set; }
-
-        public string NomeCli { get; set; } 
-
-        public string CpfCli { get; set; } 
-
-        public string TelefoneCli { get; set; } 
-
-        public string EmailCli { get; set; } 
-
-        public string EnderecoCli { get; set; } 
-    }
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public string CPF { get; set; }
+    public string Telefone { get; set; }
+    public string Email { get; set; }
+    public string Endereco { get; set; }
 }
