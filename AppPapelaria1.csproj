@@ -32,7 +32,7 @@
   <ItemGroup>
 
     <Compile Remove="Config\ConexaoCliente.cs" />
-    <Compile Remove="DAO\CaixaDAO.cs" />
+    
   </ItemGroup>
 
   <ItemGroup>
@@ -45,11 +45,52 @@
 
   <ItemGroup>
 
-    <Content Include="DAO\CaixaDAO.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="26.7.0" />
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  <PackageReference Include="MySql.Data" Version="26.7.0" />
   </ItemGroup>
 
 </Project>
