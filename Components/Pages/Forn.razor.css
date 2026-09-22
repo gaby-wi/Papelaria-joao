@@ -150,7 +150,7 @@ table {
     font-weight: bold;
 }
 
-@@media(max-width:900px) {
+@media(max-width:900px) {
 
     .conteudo {
         grid-template-columns: 1fr;

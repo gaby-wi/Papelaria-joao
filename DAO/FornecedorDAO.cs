@@ -22,7 +22,7 @@ namespace AppPapelaria1.DAO;
                 var lista = new List<Fornecedor>();
 
                 // Buscando a Conexão com o banco de dados
-                using var con = _conexao.GetConnectionFornecedor();
+                using var con = _conexao.GetConnection();
 
 
                 string sql = "SELECT * FROM fornecedor";

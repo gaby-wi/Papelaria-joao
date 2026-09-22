@@ -1,6 +1,5 @@
 ﻿@page "/fornecedor"
 @inject FornecedorDAO FornecedorP
-
 <div class="container">
 
     <div class="topo">
@@ -13,6 +12,13 @@
         <!-- FORMULÁRIO -->
         <!-- Cadastro de fornecedores -->
         <div class="card">
+            @* CREATE TABLE fornecedor (
+            id_for INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            nome_for VARCHAR(200),
+            cnpj_for VARCHAR(200),
+            telefone_for VARCHAR(200),
+            categoria_for VARCHAR(200),
+            observacoes_for VARCHAR(200) *@
 
             <h2>Cadastro de Fornecedor</h2>
 
@@ -90,12 +96,12 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-                @foreach(var forn in Fornecedor)
+                @foreach(var forn in fornecedores)
                 {
                     <tr>
-                        <td>@FornecedorP.Nome</td>
-                        <td>@Fornecedor.Categoria</td>
-                        <td>@Fornecedor.Observacoes</td>
+                        <td>@forn.Nome</td>
+                        <td>@forn.Categoria</td>
+                        <td>@forn.Observacoes</td>
                     </tr>
                 }
             </table>
@@ -106,5 +112,13 @@
 
 </div>
 @code {
-    private List<AppPapelaria1.Model.Fornecedor> Fornecedor { get; set; } = [];
+    private List<AppPapelaria1.Model.Fornecedor> fornecedores { get; set; } = [];
+    private string? MensagemErro { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        fornecedores = FornecedorP.Listar();
+
+        return Task.CompletedTask;
+    }   
 }

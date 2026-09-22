@@ -8,7 +8,6 @@ namespace AppPapelaria1.Config
         private readonly IConfiguration _configuration;
         public Conexao(IConfiguration configuration)
         {
-            _configuration = configuration;
             _connectionString = configuration.GetConnectionString("MySqlConnection") ?? "";
         }
 
@@ -19,24 +18,12 @@ namespace AppPapelaria1.Config
             return conn;
         }
 
-        public MySqlConnection GetConnectionFornecedor()
-        {
-            string connectionStringFornecedor = _configuration.GetConnectionString("MySqlConnectionFornecedor") ?? "";
-            var conn = new MySqlConnection(connectionStringFornecedor);
-            conn.Open();
-            return conn;
-        }
-
         public MySqlCommand CreateCommand(string query, MySqlConnection? conn = null)
         {
             conn ??= GetConnection();
             return new MySqlCommand(query, conn);
         }
 
-        public MySqlCommand CreateCommandFornecedor(string query, MySqlConnection? conn = null)
-        {
-            conn ??= GetConnectionFornecedor();
-            return new MySqlCommand(query, conn);
-        }
+      
     }
 }
