@@ -30,14 +30,13 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
-=======
+
     <Compile Remove="Config\ConexaoCliente.cs" />
     <Compile Remove="DAO\CaixaDAO.cs" />
   </ItemGroup>
 
   <ItemGroup>
->>>>>>> 65c121a0acc9cea91570d8a6d72bb9a9be6442dd
+
     <Content Remove="Components\Pages\CadastrarProduto.razor.razor" />
     <Content Remove="Components\Pages\CadastroFornecedor.razor.razor" />
     <Content Remove="Components\Pages\Painel Principal.razor" />
@@ -45,13 +44,11 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
-=======
+
     <Content Include="DAO\CaixaDAO.cs" />
   </ItemGroup>
 
   <ItemGroup>
->>>>>>> 65c121a0acc9cea91570d8a6d72bb9a9be6442dd
     <PackageReference Include="MySql.Data" Version="26.7.0" />
   </ItemGroup>
 
