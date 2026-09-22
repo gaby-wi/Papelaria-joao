@@ -32,7 +32,10 @@
   <ItemGroup>
 
     <Compile Remove="Config\ConexaoCliente.cs" />
+<<<<<<< HEAD
     
+=======
+>>>>>>> 6f8d35ca1f1fddff94cad1f7c4a45bac222366e5
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +46,7 @@
     <Content Remove="Components\Pages\RegistroVendas.razor.razor" />
   </ItemGroup>
 
+<<<<<<< HEAD
   <ItemGroup>
 
 	  
@@ -91,6 +95,12 @@
 	  
 	  
 	  <PackageReference Include="MySql.Data" Version="26.7.0" />
+=======
+  
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="26.7.0" />
+>>>>>>> 6f8d35ca1f1fddff94cad1f7c4a45bac222366e5
   </ItemGroup>
 
 </Project>
