@@ -1,4 +1,5 @@
 using AppPapelaria1;
+using AppPapelaria1.Components.Pages;
 using AppPapelaria1.Config;
 using AppPapelaria1.DAO;
 
@@ -12,6 +13,10 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped<Conexao>();
 builder.Services.AddScoped<ProcessoDAO>();
 builder.Services.AddScoped<FornecedorDAO>();
+builder.Services.AddScoped<CaixaDAO>();
+builder.Services.AddScoped<ClienteDAO>();
+builder.Services.AddScoped<CategoriaDAO>();
+
 
 var app = builder.Build();
 

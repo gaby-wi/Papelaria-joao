@@ -32,7 +32,6 @@
   <ItemGroup>
 
     <Compile Remove="Config\ConexaoCliente.cs" />
-    <Compile Remove="DAO\CaixaDAO.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,10 +42,7 @@
     <Content Remove="Components\Pages\RegistroVendas.razor.razor" />
   </ItemGroup>
 
-  <ItemGroup>
-
-    <Content Include="DAO\CaixaDAO.cs" />
-  </ItemGroup>
+  
 
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="26.7.0" />
