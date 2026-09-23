@@ -1,13 +1,14 @@
-﻿using AppPapelaria1.Config;
+﻿namespace AppPapelaria1.DAO;
+using AppPapelaria1.Config;
 using AppPapelaria1.Model;
 
-namespace AppPapelaria1.DAO;
+public class CaixaDAO { }
 
-public class CaixaDAO
+public class caixaDAO
 {
     private readonly Conexao _conexao;
 
-    public CaixaDAO(Conexao conexao)
+    public caixaDAO(Conexao conexao)
     {
         _conexao = conexao;
     }
@@ -18,7 +19,7 @@ public class CaixaDAO
         {
             var lista = new List<Caixa>();
 
-            // Buscando a Conexão com o banco de dados
+            // Buscando e abrindo a conexão com o banco de dados
             using var con = _conexao.GetConnection();
 
             string sql = "SELECT * FROM Caixa";
@@ -30,26 +31,18 @@ public class CaixaDAO
             while (leitor.Read())
             {
                 var caixa = new Caixa();
-
                 caixa.Id = leitor.GetInt32("id_cai");
-                caixa.DataAbertura = leitor.GetDateTime("Data_abertura_cai");
-                caixa.ValorInicial = leitor.GetFloat("Valor_inicial_cai");
+                caixa.DataAbertura = leitor.GetDateTime("data_abertura_cai");
+                caixa.DataFechamento = leitor.GetDateTime("data_fechamento_cai");
+                caixa.ValorInicial = leitor.GetFloat("valor_inicial_cai");
                 caixa.ValorFinal = leitor.GetFloat("valor_final_cai");
-
-                if (!leitor.IsDBNull(leitor.GetOrdinal("DataDfechamento_cai")))
-                {
-                    caixa.DataFechamento = leitor.GetDateTime("DataDfechamento_cai");
-                }
-
-                if (!leitor.IsDBNull(leitor.GetOrdinal("ValorFinal_cai")))
-                {
-                    caixa.ValorFinal = leitor.GetFloat("ValorFinal_cai");
-                }
+                caixa.IdFuncionario = leitor.GetInt32("id_fun_fk");
 
                 lista.Add(caixa);
             }
 
             return lista;
+
         }
         catch
         {

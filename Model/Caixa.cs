@@ -6,11 +6,11 @@ public class Caixa
 
     public DateTime DataAbertura { get; set; }
 
-    public DateTime? DataFechamento { get; set; }
+    public DateTime DataFechamento { get; set; }
 
     public float ValorInicial { get; set; }
 
-    public float? ValorFinal { get; set; }
+    public float ValorFinal { get; set; }
 
-    public string Status { get; set; } = "";
+    public int IdFuncionario { get; set; }
 }
