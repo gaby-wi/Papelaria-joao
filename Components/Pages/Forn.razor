@@ -1,124 +1,86 @@
 ﻿@page "/fornecedor"
 @inject FornecedorDAO FornecedorP
-<div class="container">
+@inject AppPapelaria1.Config.Conexao Conexao
+@using AppPapelaria1.Model;
+@using AppPapelaria1.DAO;
 
-    <div class="topo">
-        <h1>📦 Fornecedor de Materiais</h1>
-        <p>Sistema de gerenciamento da papelaria</p>
-    </div>
+<div class="container">
 
     <div class="conteudo">
 
-        <!-- FORMULÁRIO -->
-        <!-- Cadastro de fornecedores -->
         <div class="card">
-            @* CREATE TABLE fornecedor (
-            id_for INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            nome_for VARCHAR(200),
-            cnpj_for VARCHAR(200),
-            telefone_for VARCHAR(200),
-            categoria_for VARCHAR(200),
-            observacoes_for VARCHAR(200) *@
+            @* id_for int auto_increment primary key,
+            nome_fantasia_for varchar(150) not null,
+            telefone_for varchar(30),
+            endereco_for varchar (100),
+            cnpj_for varchar(20),
+            email_for varchar (100) *@
 
-            <h2>Cadastro de Fornecedor</h2>
+            <h2>Fornecedor</h2>
 
             <div class="grupo-input">
-                <label>Nome da Empresa</label>
-
+                <label>Id do Fornecedor</label>
                 <input type="text"
-                       placeholder="Digite o nome da empresa" />
+                       placeholder="ex: 1" />
             </div>
 
             <div class="grupo-input">
-                <label>CNPJ</label>
-
+                <label>Nome do Fornecedor</label>
                 <input type="text"
-                       placeholder="00.000.000/0000-00" />
+                       placeholder="ex: ABC Papelaria" />
             </div>
 
             <div class="grupo-input">
                 <label>Telefone</label>
-
                 <input type="text"
                        placeholder="(00) 00000-0000" />
             </div>
 
-            <div class="grupo-input">
+            @*
+                <div class="grupo-input">
+                <!-- Rótulo do campo para o usuário saber o que deve selecionar -->
                 <label>Categoria</label>
 
+                <!-- Caixinha de seleção (Dropdown) -->
                 <select>
-
-                    <option selected disabled>
+                    <!-- Opção padrão que fica selecionada e desabilitada antes do usuário escolher -->
+                    <option selected disabled value="">
                         Selecione uma categoria
                     </option>
 
-                    <option>Papelaria</option>
-                    <option>Informática</option>
-                    <option>Escritório</option>
-                    <option>Artes</option>
-
+                    <!-- Verifica se a lista de categorias não está nula -->
+                    @if (categorias != null)
+                    {
+                        <!-- Laço de repetição: Passa por CADA categoria vinda do banco de dados -->
+                        @foreach (var c in categorias)
+                        {
+                            <option value="@c.Id">@c.Nome</option>
+                        }
+                    }
                 </select>
             </div>
-
-            <!-- Informações do fornecedor -->
-            <div class="grupo-input">
-                <label>Observações</label>
-
-                <textarea placeholder="Digite observações sobre o fornecedor">
-                </textarea>
-            </div>
-
-            <div class="botoes">
-
-                <button class="btn-salvar">
-                    Salvar
-                </button>
-
-                <button class="btn-limpar">
-                    Limpar
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- TABELA -->
-        <div class="card">
-
-            <h2>Fornecedores Cadastrados</h2>
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>Empresa</th>
-                        <th>Categoria</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                @foreach(var forn in fornecedores)
-                {
-                    <tr>
-                        <td>@forn.Nome</td>
-                        <td>@forn.Categoria</td>
-                        <td>@forn.Observacoes</td>
-                    </tr>
-                }
-            </table>
+            *@
 
         </div>
 
     </div>
 
 </div>
+
 @code {
-    private List<AppPapelaria1.Model.Fornecedor> fornecedores { get; set; } = [];
-    private string? MensagemErro { get; set; }
+    // Declarando as variáveis da lista para o Blazor reconhecer no HTML
+    private List<Fornecedor> fornecedores { get; set; } = new();
+    private List<Categoria> categorias { get; set; } = new();
 
     protected override Task OnInitializedAsync()
     {
+        // Busca os fornecedores
         fornecedores = FornecedorP.Listar();
 
+        // Instancia o CategoriaDAO com a conexão injetada e busca as categorias
+        @*var categoriaDAO = new CategoriaDAO(Conexao);
+        categorias = categoriaDAO.Listar();*@
+
         return Task.CompletedTask;
-    }   
+    }
 }

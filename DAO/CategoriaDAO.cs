@@ -39,25 +39,6 @@ public class CategoriaDAO
 
             return
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
                 lista;
         }
         catch

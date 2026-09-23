@@ -1,12 +1,9 @@
 ﻿@page "/caixa"
 @inject AppPapelaria1.DAO.CaixaDAO CaixaP
+@using AppPapelaria1.Config;
+@using AppPapelaria1.Model;
 
-<<<<<<< HEAD
-<div class="container">
-=======
-<PageTitle>Controle de Caixa</PageTitle>
-
-@*<div class="container-fluid">
+<div class="container-fluid">
 
     <h1 class="h3 fw-bold text-gray-800 mb-4">
         Controle de Caixa
@@ -49,7 +46,6 @@
                 </h2>
             </div>
         </div>
->>>>>>> 87370fbdff718f3ec7288e6952f4cdff32f359e7
 
     <div class="topo">
         <h1> Controle de Caixa</h1>
@@ -140,5 +136,15 @@
 
         return Task.CompletedTask;
     }
+    // Declarando as variáveis usadas nos inputs (@bind="valorInicial") e na tela
+    private decimal valorInicial { get; set; }
+    private decimal totalEntradas { get; set; }
+    private decimal totalSaidas { get; set; }
+
+    // Declarando o método chamado no botão do caixa
+    private void AbrirCaixa()
+    {
+        // Sua lógica para abrir caixa aqui...
+    }
 }
-*@
+</div>

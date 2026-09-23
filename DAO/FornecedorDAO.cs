@@ -2,10 +2,6 @@
 using AppPapelaria1.Config;
 using AppPapelaria1.Model;
 namespace AppPapelaria1.DAO;
-
-
-
-
     public class FornecedorDAO
     {
         private readonly Conexao _conexao;
@@ -37,7 +33,7 @@ namespace AppPapelaria1.DAO;
                 {
                     var fornecedor = new Fornecedor();
                     fornecedor.Id = leitor.GetInt32("id_for");
-                    fornecedor.Nome = leitor.GetString("nome_for");
+                    fornecedor.Nome = leitor.GetString("nome_fantasia_for");
                     fornecedor.Cnpj = leitor.GetString("cnpj_for");
                     fornecedor.Telefone = leitor.GetString("telefone_for");
                     fornecedor.Categoria = leitor.GetString("categoria_for");
