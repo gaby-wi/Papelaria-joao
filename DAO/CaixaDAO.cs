@@ -1,59 +1,51 @@
-﻿using AppPapelaria1.Config;
-using AppPapelaria1.Model;
-
-namespace AppPapelaria1.DAO;
-
-public class CaixaDAO
+﻿namespace AppPapelaria1.DAO
 {
-    private readonly Conexao _conexao;
+    using AppPapelaria1.Config;
+    using AppPapelaria1.Model;
 
-    public CaixaDAO(Conexao conexao)
+    public class CaixaDAO
     {
-        _conexao = conexao;
-    }
+        private readonly Conexao _conexao;
 
-    public List<Caixa> Listar()
-    {
-        try
+        public CaixaDAO(Conexao conexao)
         {
-            var lista = new List<Caixa>();
-
-            // Buscando a Conexão com o banco de dados
-            using var con = _conexao.GetConnection();
-
-            string sql = "SELECT * FROM Caixa";
-            using var comando = con.CreateCommand();
-            comando.CommandText = sql;
-
-            using var leitor = comando.ExecuteReader();
-
-            while (leitor.Read())
-            {
-                var caixa = new Caixa();
-
-                caixa.Id = leitor.GetInt32("id_cai");
-                caixa.DataAbertura = leitor.GetDateTime("DataDabertura_cai");
-                caixa.ValorInicial = leitor.GetFloat("ValorInicial_cai");
-                caixa.Status = leitor.GetString("status_cai");
-
-                if (!leitor.IsDBNull(leitor.GetOrdinal("DataDfechamento_cai")))
-                {
-                    caixa.DataFechamento = leitor.GetDateTime("DataDfechamento_cai");
-                }
-
-                if (!leitor.IsDBNull(leitor.GetOrdinal("ValorFinal_cai")))
-                {
-                    caixa.ValorFinal = leitor.GetFloat("ValorFinal_cai");
-                }
-
-                lista.Add(caixa);
-            }
-
-            return lista;
+            _conexao = conexao;
         }
-        catch
+
+        public List<Caixa> Listar()
         {
-            throw;
+            try
+            {
+                var lista = new List<Caixa>();
+
+                // Buscando e abrindo a conexão com o banco de dados
+                using var con = _conexao.GetConnection();
+
+                string sql = "SELECT * FROM Caixa";
+                using var comando = con.CreateCommand();
+                comando.CommandText = sql;
+
+                using var leitor = comando.ExecuteReader();
+
+                while (leitor.Read())
+                {
+                    var caixa = new Caixa();
+                    caixa.Id = leitor.GetInt32("id_cai");
+                    caixa.DataAbertura = leitor.GetDateTime("data_abertura_cai");
+                    caixa.DataFechamento = leitor.GetDateTime("data_fechamento_cai");
+                    caixa.ValorInicial = leitor.GetFloat("valor_inicial_cai");
+                    caixa.ValorFinal = leitor.GetFloat("valor_final_cai");
+                    caixa.IdFuncionario = leitor.GetInt32("id_fun_fk");
+
+                    lista.Add(caixa);
+                }
+
+                return lista;
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }
