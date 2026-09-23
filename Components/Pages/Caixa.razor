@@ -1,7 +1,55 @@
 ﻿@page "/caixa"
 @inject AppPapelaria1.DAO.CaixaDAO CaixaP
 
+<<<<<<< HEAD
 <div class="container">
+=======
+<PageTitle>Controle de Caixa</PageTitle>
+
+@*<div class="container-fluid">
+
+    <h1 class="h3 fw-bold text-gray-800 mb-4">
+        Controle de Caixa
+    </h1>
+
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Abertura do Caixa</h5>
+
+                <label>Valor Inicial</label>
+
+                <input class="form-control mb-3"
+                       type="number"
+                       @bind="valorInicial" />
+
+                <button class="btn btn-primary" @onclick="AbrirCaixa">
+                    Abrir Caixa
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Entradas</h5>
+
+                <h2 class="text-success">
+                    R$ @totalEntradas.ToString("F2")
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Saídas</h5>
+
+                <h2 class="text-danger">
+                    R$ @totalSaidas.ToString("F2")
+                </h2>
+            </div>
+        </div>
+>>>>>>> 87370fbdff718f3ec7288e6952f4cdff32f359e7
 
     <div class="topo">
         <h1> Controle de Caixa</h1>
@@ -93,3 +141,4 @@
         return Task.CompletedTask;
     }
 }
+*@
