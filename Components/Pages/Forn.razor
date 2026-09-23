@@ -36,7 +36,7 @@
                        placeholder="(00) 00000-0000" />
             </div>
 
-            @*
+            
                 <div class="grupo-input">
                 <!-- Rótulo do campo para o usuário saber o que deve selecionar -->
                 <label>Categoria</label>
@@ -59,7 +59,7 @@
                     }
                 </select>
             </div>
-            *@
+            
 
         </div>
 
@@ -70,7 +70,10 @@
 @code {
     // Declarando as variáveis da lista para o Blazor reconhecer no HTML
     private List<Fornecedor> fornecedores { get; set; } = new();
-    private List<Categoria> categorias { get; set; } = new();
+    
+    // Força o tipo correto usando o caminho completo da pasta Model:
+    private List<AppPapelaria1.Model.Categoria> categorias { get; set; } = new();
+
 
     protected override Task OnInitializedAsync()
     {
