@@ -13,6 +13,7 @@ builder.Services.AddScoped<Conexao>();
 builder.Services.AddScoped<CaixaDAO>();
 builder.Services.AddScoped<ProcessoDAO>();
 builder.Services.AddScoped<FornecedorDAO>();
+builder.Services.AddScoped<FinanceiroDAO>();
 builder.Services.AddScoped<CaixaDAO>();
 builder.Services.AddScoped<ClienteDAO>();
 builder.Services.AddScoped<CategoriaDAO>();

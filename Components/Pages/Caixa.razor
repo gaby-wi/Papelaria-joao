@@ -1,8 +1,9 @@
-@page "/caixa"
-@using AppPapelaria1.DAO
-@using AppPapelaria1.Model
-@inject CaixaDAO caixaDAO
+﻿@page "/caixa"
+@inject AppPapelaria1.DAO.CaixaDAO CaixaP
 
+<<<<<<< HEAD
+<div class="container">
+=======
 <PageTitle>Controle de Caixa</PageTitle>
 
 @*<div class="container-fluid">
@@ -48,111 +49,96 @@
                 </h2>
             </div>
         </div>
+>>>>>>> 87370fbdff718f3ec7288e6952f4cdff32f359e7
 
+    <div class="topo">
+        <h1> Controle de Caixa</h1>
+        <p>Sistema de gerenciamento da papelaria</p>
     </div>
 
-    <div class="card shadow p-3">
+    <div class="conteudo">
 
-        <h5 class="mb-3">
-            Registros de Caixas
-        </h5>
+        <!-- FORMULÁRIO -->
+        <div class="card">
+            <h2>Abertura / Fechamento de Caixa</h2>
 
-        @if (caixas == null)
-        {
-            <p>
-                <em>Carregando dados do banco...</em>
-            </p>
-        }
-        else if (caixas.Count == 0)
-        {
-            <p class="text-muted">
-                Nenhum registro de caixa encontrado.
-            </p>
-        }
-        else
-        {
-            <table class="table table-striped table-hover">
+            <div class="grupo-input">
+                <label>Data de Abertura</label>
+                <input type="date" />
+            </div>
 
-                <thead class="table-dark">
+            <div class="grupo-input">
+                <label>Data de Fechamento</label>
+                <input type="date" />
+            </div>
+
+            <div class="grupo-input">
+                <label>Valor Inicial (R$)</label>
+                <input type="number" step="0.01" placeholder="0.00" />
+            </div>
+
+            <div class="grupo-input">
+                <label>Valor Final (R$)</label>
+                <input type="number" step="0.01" placeholder="0.00" />
+            </div>
+
+            <div class="grupo-input">
+                <label>ID do Funcionário</label>
+                <input type="number" placeholder="Digite o ID do funcionário" />
+            </div>
+
+            <div class="botoes">
+                <button class="btn-salvar">Salvar</button>
+                <button class="btn-limpar">Limpar</button>
+            </div>
+        </div>
+
+        <!-- TABELA -->
+        <div class="card">
+            <h2>Histórico de Caixas</h2>
+
+            <table>
+                <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Data Abertura</th>
-                        <th>Data Fechamento</th>
-                        <th>Valor Inicial</th>
-                        <th>Valor Final</th>
-                        <th>Status</th>
+                        <th>Abertura</th>
+                        <th>Fechamento</th>
+                        <th>Inicial</th>
+                        <th>Final</th>
                     </tr>
                 </thead>
-
                 <tbody>
-
-                    @foreach (var c in caixas)
+                    @foreach (var cai in caixas)
                     {
                         <tr>
-
-                            <td>@c.Id</td>
-
-                            <td>
-                                @c.DataAbertura.ToString("dd/MM/yyyy")
-                            </td>
-
-                            <td>
-                                @(c.DataFechamento.HasValue
-                                    ? c.DataFechamento.Value.ToString("dd/MM/yyyy")
-                                    : "-")
-                            </td>
-
-                            <td>
-                                R$ @c.ValorInicial.ToString("F2")
-                            </td>
-
-                            <td>
-                                @(c.ValorFinal.HasValue
-                                    ? $"R$ {c.ValorFinal.Value:F2}"
-                                    : "-")
-                            </td>
-
-                            <td>
-                                <span class="badge @(c.Status == "Aberto"
-                                    ? "bg-success"
-                                    : "bg-secondary")">
-
-                                    @c.Status
-
-                                </span>
-                            </td>
-
+                            <td>@cai.DataAbertura.ToString("dd/MM/yyyy")</td>
+                            <td>@cai.DataFechamento.ToString("dd/MM/yyyy")</td>
+                            <td>@cai.ValorInicial.ToString("C")</td>
+                            <td>@cai.ValorFinal.ToString("C")</td>
                         </tr>
                     }
-
                 </tbody>
-
             </table>
-        }
+        </div>
 
     </div>
-
 </div>
 
 @code {
+    private List<AppPapelaria1.Model.Caixa> caixas { get; set; } = new();
+    private string? MensagemErro { get; set; }
 
-    private List<Caixa> caixas = new();
-
-    private float valorInicial;
-
-    private float totalEntradas = 1250;
-
-    private float totalSaidas = 150;
-
-    protected override void OnInitialized()
+    protected override Task OnInitializedAsync()
     {
-        // Correção aqui: utiliza a variável injetada "caixaDAO" em minúsculo
-        caixas = caixaDAO.Listar();
-    }
+        try
+        {
+            caixas = CaixaP.Listar();
+        }
+        catch (Exception ex)
+        {
+            MensagemErro = ex.Message;
+        }
 
-    private void AbrirCaixa()
-    {
-        Console.WriteLine("Valor inicial: " + valorInicial);
+        return Task.CompletedTask;
     }
 }
 *@
