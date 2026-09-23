@@ -37,7 +37,28 @@ public class CategoriaDAO
                 lista.Add(categoria);
             }
 
-            return lista;
+            return
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                lista;
         }
         catch
         {

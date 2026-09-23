@@ -1,0 +1,157 @@
+@page "/caixa"
+@using AppPapelaria1.DAO
+@using AppPapelaria1.Model
+@inject CaixaDAO caixaDAO
+
+<PageTitle>Controle de Caixa</PageTitle>
+
+<div class="container-fluid">
+
+    <h1 class="h3 fw-bold text-gray-800 mb-4">
+        Controle de Caixa
+    </h1>
+
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Abertura do Caixa</h5>
+
+                <label>Valor Inicial</label>
+
+                <input class="form-control mb-3"
+                       type="number"
+                       @bind="valorInicial" />
+
+                <button class="btn btn-primary" @onclick="AbrirCaixa">
+                    Abrir Caixa
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Entradas</h5>
+
+                <h2 class="text-success">
+                    R$ @totalEntradas.ToString("F2")
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Saídas</h5>
+
+                <h2 class="text-danger">
+                    R$ @totalSaidas.ToString("F2")
+                </h2>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow p-3">
+
+        <h5 class="mb-3">
+            Registros de Caixas
+        </h5>
+
+        @if (caixas == null)
+        {
+            <p>
+                <em>Carregando dados do banco...</em>
+            </p>
+        }
+        else if (caixas.Count == 0)
+        {
+            <p class="text-muted">
+                Nenhum registro de caixa encontrado.
+            </p>
+        }
+        else
+        {
+            <table class="table table-striped table-hover">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Data Abertura</th>
+                        <th>Data Fechamento</th>
+                        <th>Valor Inicial</th>
+                        <th>Valor Final</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var c in caixas)
+                    {
+                        <tr>
+
+                            <td>@c.Id</td>
+
+                            <td>
+                                @c.DataAbertura.ToString("dd/MM/yyyy")
+                            </td>
+
+                            <td>
+                                @(c.DataFechamento.HasValue
+                                    ? c.DataFechamento.Value.ToString("dd/MM/yyyy")
+                                    : "-")
+                            </td>
+
+                            <td>
+                                R$ @c.ValorInicial.ToString("F2")
+                            </td>
+
+                            <td>
+                                @(c.ValorFinal.HasValue
+                                    ? $"R$ {c.ValorFinal.Value:F2}"
+                                    : "-")
+                            </td>
+
+                            <td>
+                                <span class="badge @(c.Status == "Aberto"
+                                    ? "bg-success"
+                                    : "bg-secondary")">
+
+                                    @c.Status
+
+                                </span>
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        }
+
+    </div>
+
+</div>
+
+@code {
+
+    private List<Caixa> caixas = new();
+
+    private float valorInicial;
+
+    private float totalEntradas = 1250;
+
+    private float totalSaidas = 150;
+
+    protected override void OnInitialized()
+    {
+        // Correção aqui: utiliza a variável injetada "caixaDAO" em minúsculo
+        caixas = caixaDAO.Listar();
+    }
+
+    private void AbrirCaixa()
+    {
+        Console.WriteLine("Valor inicial: " + valorInicial);
+    }
+}
