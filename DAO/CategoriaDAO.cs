@@ -21,7 +21,8 @@ public class CategoriaDAO
             // Buscando a Conexão com o banco de dados
             using var con = _conexao.GetConnection();
 
-            string sql = "SELECT * FROM categoria";
+            // Usamos 'AS id' e 'AS nome' para mapear os nomes das colunas do MySQL (id_cate / nome_cate)
+            string sql = "SELECT id_cate AS id, nome_cate AS nome FROM Categoria";
             using var comando = con.CreateCommand();
             comando.CommandText = sql;
 
@@ -37,9 +38,7 @@ public class CategoriaDAO
                 lista.Add(categoria);
             }
 
-            return
-                
-                lista;
+            return lista;
         }
         catch
         {

@@ -5,54 +5,9 @@
 
 <div class="container-fluid">
 
-    <h1 class="h3 fw-bold text-gray-800 mb-4">
-        Controle de Caixa
-    </h1>
-
-    <div class="row mb-4">
-
-        <div class="col-md-4">
-            <div class="card shadow p-3">
-                <h5>Abertura do Caixa</h5>
-
-                <label>Valor Inicial</label>
-
-                <input class="form-control mb-3"
-                       type="number"
-                       @bind="valorInicial" />
-
-                <button class="btn btn-primary" @onclick="AbrirCaixa">
-                    Abrir Caixa
-                </button>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow p-3">
-                <h5>Entradas</h5>
-
-                <h2 class="text-success">
-                    R$ @totalEntradas.ToString("F2")
-                </h2>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow p-3">
-                <h5>Saídas</h5>
-
-                <h2 class="text-danger">
-                    R$ @totalSaidas.ToString("F2")
-                </h2>
-            </div>
-        </div>
-
-    <div class="topo">
-        <h1> Controle de Caixa</h1>
-        <p>Sistema de gerenciamento da papelaria</p>
-    </div>
-
     <div class="conteudo">
+
+        <h1>Caixa</h1>
 
         <!-- FORMULÁRIO -->
         <div class="card">
@@ -119,6 +74,146 @@
     </div>
 </div>
 
+<style>
+    .container-fluid {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .conteudo {
+        width: 100%;
+        max-width: 700px;
+    }
+
+        .conteudo h1 {
+            color: #6b21a8;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-bottom: 24px;
+    }
+
+        .card h2 {
+            color: #8b5cf6;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+    .grupo-input {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 16px;
+    }
+
+        .grupo-input label {
+            color: #4b5563;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .grupo-input input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9d5ff;
+            border-radius: 12px;
+            outline: none;
+            font-size: 14px;
+            color: #374151;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+            .grupo-input input:focus {
+                border-color: #8b5cf6;
+            }
+
+    .botoes {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .btn-salvar {
+        flex: 1;
+        background-color: #a855f7;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+        .btn-salvar:hover {
+            background-color: #9333ea;
+        }
+
+    .btn-limpar {
+        flex: 1;
+        background-color: #f3e8ff;
+        color: #7e22ce;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+        .btn-limpar:hover {
+            background-color: #e9d5ff;
+        }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin-top: 10px;
+    }
+
+    th {
+        background-color: #faf5ff;
+        color: #7e22ce;
+        font-weight: 600;
+        font-size: 14px;
+        text-align: left;
+        padding: 12px 16px;
+        border-bottom: 2px solid #e9d5ff;
+    }
+
+        th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+    td {
+        padding: 12px 16px;
+        font-size: 14px;
+        color: #374151;
+        border-bottom: 1px solid #f3e8ff;
+    }
+
+    tr:hover td {
+        background-color: #faf5ff;
+    }
+</style>
+
 @code {
     private List<AppPapelaria1.Model.Caixa> caixas { get; set; } = new();
     private string? MensagemErro { get; set; }
@@ -147,4 +242,3 @@
         // Sua lógica para abrir caixa aqui...
     }
 }
-</div>

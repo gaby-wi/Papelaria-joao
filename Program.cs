@@ -17,6 +17,8 @@ builder.Services.AddScoped<FornecedorDAO>();
 builder.Services.AddScoped<FinanceiroDAO>();
 builder.Services.AddScoped<ClienteDAO>();
 builder.Services.AddScoped<CategoriaDAO>();
+builder.Services.AddScoped<ProdutoDAO>();
+builder.Services.AddScoped<FuncionarioDAO>();
 
 var app = builder.Build();
 
@@ -32,7 +34,7 @@ app.UseAntiforgery();
 // Mapeia os arquivos estáticos (CSS, imagens, JS)
 app.MapStaticAssets();
 
-// MAPEAMENTO FUNDAMENTAL DO BLAZOR (Faltava este trecho):
+// MAPEAMENTO FUNDAMENTAL DO BLAZOR:
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

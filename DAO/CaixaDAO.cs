@@ -6,7 +6,9 @@ public class CaixaDAO {
 
     private readonly Conexao _conexao;
 
-    public CaixaDAO(Conexao conexao) { }
+    public CaixaDAO(Conexao conexao) { 
+        _conexao = conexao;
+    }
 
     public List<Caixa> Listar()
     {
