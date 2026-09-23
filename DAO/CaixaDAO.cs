@@ -32,9 +32,9 @@ public class CaixaDAO
                 var caixa = new Caixa();
 
                 caixa.Id = leitor.GetInt32("id_cai");
-                caixa.DataAbertura = leitor.GetDateTime("DataDabertura_cai");
-                caixa.ValorInicial = leitor.GetFloat("ValorInicial_cai");
-                caixa.Status = leitor.GetString("status_cai");
+                caixa.DataAbertura = leitor.GetDateTime("Data_abertura_cai");
+                caixa.ValorInicial = leitor.GetFloat("Valor_inicial_cai");
+                caixa.ValorFinal = leitor.GetFloat("valor_final_cai");
 
                 if (!leitor.IsDBNull(leitor.GetOrdinal("DataDfechamento_cai")))
                 {
