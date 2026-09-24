@@ -19,6 +19,7 @@ builder.Services.AddScoped<ClienteDAO>();
 builder.Services.AddScoped<CategoriaDAO>();
 builder.Services.AddScoped<ProdutoDAO>();
 builder.Services.AddScoped<FuncionarioDAO>();
+builder.Services.AddScoped<EstoqueDAO>();
 
 var app = builder.Build();
 

@@ -1,127 +1,198 @@
-<!-- Define a rota da página de estoque -->
 @page "/estoque"
+@inject EstoqueDAO estoqueDAO
+@inject AppPapelaria1.Config.Conexao Conexao
+@using AppPapelaria1.Model;
+@using AppPapelaria1.DAO;
 
-<!-- Container principal da página -->
-<div class="estoque-container">
+<div class="container">
 
-    <!-- Barra superior decorativa -->
-    <div class="topo-roxo"></div>
-
-    <!-- Cabeçalho da página -->
-    <div class="cabecalho">
-
-        <!-- Área onde fica a logo do sistema -->
-        <div class="logo-area">
-            <img src="/images/logo.png" class="logo" alt="Logo">
-        </div>
-
-        <!-- Campo de pesquisa de produtos -->
-        <div class="search-box">
-            <input type="text" placeholder="Que você está procurando">
-            <span>🔍</span>
-        </div>
-
-        <!-- Ícones de mensagens, notificações e perfil -->
-        <div class="icones">
-            <span>💬</span>
-            <span>🔔</span>
-            <span>👤</span>
-        </div>
-
-    </div>
-
-    <!-- Faixa decorativa que separa o cabeçalho do conteúdo -->
-    <div class="faixa"></div>
-
-    <!-- Área principal da página -->
     <div class="conteudo">
 
-        <!-- Grade onde os produtos são organizados -->
-        <div class="produtos-grid">
+        <div class="card">
+            @* id_est int auto_increment primary key,
+               quantidade_inicial_est varchar(100),
+               quantidade_final_est int,
+               id_pro_fk int,
+               foreign key (id_pro_fk) references Produto(id_pro) *@
 
-            <!-- Card do Produto 1 -->
-            <div class="produto-card">
-                <!-- Número de identificação do produto -->
-                <h3>#1</h3>
+            <h2>Controle de Estoque</h2>
 
-                <!-- Imagem do produto -->
-                <img src="/images/produto1.png">
-
-                <!-- Nome do produto -->
-                <p>Caderno Kawaii 200 Pg 10 Matérias</p>
-
-                <!-- Quantidade disponível em estoque -->
-                <span>Quantidade: 32x</span>
-
-                <!-- Nome do fornecedor -->
-                <h4>BR IMPORTS</h4>
+            <!-- Id do Estoque -->
+            <div class="grupo-input">
+                <label>Id do Estoque</label>
+                <input type="text"
+                       @bind="id"
+                       placeholder="ex: 1" />
             </div>
 
-            <!-- Card do Produto 2 -->
-            <div class="produto-card">
-                <h3>#2</h3>
-                <img src="/images/produto2.png">
-                <p>Kit Escolar Canetas estilo desenho</p>
-                <span>Quantidade: 9x</span>
-                <h4>DUDA STORE</h4>
+            <!-- Quantidade Inicial -->
+            <div class="grupo-input">
+                <label>Quantidade Inicial</label>
+                <input type="text"
+                       @bind="quantidadeInicial"
+                       placeholder="ex: 100" />
             </div>
 
-            <!-- Card do Produto 3 -->
-            <div class="produto-card">
-                <h3>#3</h3>
-                <img src="/images/produto3.png">
-                <p>Caderno Kawaii 200 Pg 10 Matérias</p>
-                <span>Quantidade: 12x</span>
-                <h4>PARAMANGUE</h4>
+            <!-- Quantidade Final -->
+            <div class="grupo-input">
+                <label>Quantidade Final</label>
+                <input type="number"
+                       @bind="quantidadeFinal"
+                       placeholder="ex: 85" />
             </div>
 
-            <!-- Card do Produto 4 -->
-            <div class="produto-card">
-                <h3>#4</h3>
-                <img src="/images/produto4.png">
-                <p>Kit Escolar Completo</p>
-                <span>Quantidade: 5x</span>
-                <h4>DONSHOP</h4>
+            <!-- Id do Produto (FK) -->
+            <div class="grupo-input">
+                <label>Id do Produto</label>
+                <input type="number"
+                       @bind="idProduto"
+                       placeholder="ex: 10" />
             </div>
 
-            <!-- Card do Produto 5 -->
-            <div class="produto-card">
-                <h3>#5</h3>
-                <img src="/images/produto5.png">
-                <p>Estojo Moranguinho</p>
-                <span>Quantidade: 23x</span>
-                <h4>ABC PAPERS</h4>
+            <!-- Botões de Ação -->
+            <div class="grupo-botoes">
+                <button class="btn-primary" @onclick="Cadastrar">+ Cadastrar Estoque</button>
+                <button class="btn-secondary" @onclick="Limpar">Cancelar</button>
             </div>
 
-            <!-- Card do Produto 6 -->
-            <div class="produto-card">
-                <h3>#6</h3>
-                <img src="/images/produto6.png">
-                <p>Caderno Dark Side 100 Pg</p>
-                <span>Quantidade: 59x</span>
-                <h4>METEORS</h4>
-            </div>
-
-            <!-- Card do Produto 7 -->
-            <div class="produto-card">
-                <h3>#7</h3>
-                <img src="/images/produto7.png">
-                <p>Caneta Luxo Unicórnio</p>
-                <span>Quantidade: 64x</span>
-                <h4>FLOY SHOP</h4>
-            </div>
-
-            <!-- Card do Produto 8 -->
-            <div class="produto-card">
-                <h3>#8</h3>
-                <img src="/images/produto8.png">
-                <p>Estojo Minimalista Preto e Branco</p>
-                <span>Quantidade: 21x</span>
-                <h4>DANI BUY</h4>
-            </div>
+            <!-- Mensagem de Retorno -->
+            @if (!string.IsNullOrEmpty(mensagem))
+            {
+                <p class="mensagem">@mensagem</p>
+            }
 
         </div>
 
     </div>
 
 </div>
+
+<!-- Estilização CSS -->
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .conteudo {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+        .card h2 {
+            color: #8b5cf6;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+    .grupo-input {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 16px;
+    }
+
+        .grupo-input label {
+            color: #4b5563;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .grupo-input input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9d5ff;
+            border-radius: 12px;
+            outline: none;
+            font-size: 14px;
+            color: #374151;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+            .grupo-input input:focus {
+                border-color: #8b5cf6;
+            }
+
+    .grupo-botoes {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .btn-primary {
+        flex: 1;
+        background-color: #a855f7;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+        .btn-primary:hover {
+            background-color: #9333ea;
+        }
+
+    .btn-secondary {
+        flex: 1;
+        background-color: #f3e8ff;
+        color: #7e22ce;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+        .btn-secondary:hover {
+            background-color: #e9d5ff;
+        }
+
+    .mensagem {
+        margin-top: 16px;
+        font-weight: 600;
+        color: #6b21a8;
+    }
+</style>
+
+@code {
+    string id = "";
+    string quantidadeInicial = "";
+    int quantidadeFinal;
+    int? idProduto;
+
+    string mensagem = "";
+
+    void Cadastrar()
+    {
+        if (string.IsNullOrWhiteSpace(quantidadeInicial) || idProduto == null || idProduto <= 0)
+        {
+            mensagem = "Preencha os campos obrigatórios e um ID de Produto válido.";
+            return;
+        }
+
+        mensagem = "Estoque cadastrado com sucesso!";
+        Limpar();
+    }
+
+    void Limpar()
+    {
+        id = "";
+        quantidadeInicial = "";
+        quantidadeFinal = 0;
+        idProduto = null;
+    }
+}
