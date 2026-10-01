@@ -1,6 +1,6 @@
 ﻿
 
-            @* <h2>Fornecedor</h2>
+            <h2>Fornecedor</h2>
 
             <div class="grupo-input">
                 <label>Id do Fornecedor</label>
@@ -44,12 +44,9 @@
                 </select>
             </div>
             
+            
 
-        </div>
-
-    </div>
-
-</div>
+        
 
 @code {
     // Declarando as variáveis da lista para o Blazor reconhecer no HTML
@@ -65,9 +62,9 @@
         fornecedores = FornecedorP.Listar();
 
         // Instancia o CategoriaDAO com a conexão injetada e busca as categorias
-        @*var categoriaDAO = new CategoriaDAO(Conexao);
-        categorias = categoriaDAO.Listar();*@
+        var categoriaDAO = new CategoriaDAO(Conexao);
+        categorias = categoriaDAO.Listar();
 
-        @* return Task.CompletedTask; *@ *@
+        return Task.CompletedTask; 
     }
 } 
