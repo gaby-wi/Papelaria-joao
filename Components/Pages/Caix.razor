@@ -85,7 +85,7 @@
                 </thead>
 
                 <tbody>
-
+                   
                     @foreach (var c in caixas)
                     {
                         <tr>
@@ -136,7 +136,7 @@
 
 @code {
 
-    private List<Caixa> caixas = new();
+    private List<Caix> caixas = new();
 
     private float valorInicial;
 
@@ -154,4 +154,24 @@
     {
         Console.WriteLine("Valor inicial: " + valorInicial);
     }
+
 }
+@* @code {
+    private List<AppPapelaria1.Model.Caixa> caixas { get; set; } = [];
+    private string? MensagemErro { get; set; }
+
+    private float valorInicial;
+
+    private float totalEntradas = 1250;
+
+    private float totalSaidas = 150;
+
+    private float abrirCaixa = 1;
+
+    protected override Task OnInitializedAsync()
+    {
+        caixas = caixaDAO.Listar();
+
+        return Task.CompletedTask;
+    }
+} *@
