@@ -42,7 +42,45 @@ namespace AppPapelaria1.DAO
                     lista.Add(funcionario);
                 }
 
+
                 return lista;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public void Inserir(Funcionario funcionario)
+        {
+            try
+            {
+                using var con = _conexao.GetConnection();
+
+                string sql = @" INSERT INTO Funcionario(nome_fun,
+                  cpf_fun,senha_fun, telefone_fun, sexo_fun,endereco_fun, email_fun)
+
+                   VALUES(@nome,@cpf,@senha,@telefone,@sexo,@endereco,@email)";
+
+                using var comando = con.CreateCommand();
+
+                comando.CommandText = sql;
+
+                comando.Parameters.AddWithValue("@nome", funcionario.Nome);
+
+                comando.Parameters.AddWithValue("@cpf", funcionario.Cpf);
+
+                comando.Parameters.AddWithValue("@senha", funcionario.Senha);
+
+                comando.Parameters.AddWithValue("@telefone", funcionario.Telefone);
+
+                comando.Parameters.AddWithValue("@sexo", funcionario.Sexo);
+
+                comando.Parameters.AddWithValue("@endereco", funcionario.Endereco);
+
+                comando.Parameters.AddWithValue("@email", funcionario.Email);
+
+                comando.ExecuteNonQuery();
             }
             catch
             {
