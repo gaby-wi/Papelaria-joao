@@ -9,38 +9,45 @@
 
         <h1>Caixa</h1>
 
+        @if (!string.IsNullOrEmpty(MensagemErro))
+        {
+            <div style="color: red; margin-bottom: 15px; font-weight: bold;">
+                @MensagemErro
+            </div>
+        }
+
         <!-- FORMULÁRIO -->
         <div class="card">
             <h2>Abertura / Fechamento de Caixa</h2>
 
             <div class="grupo-input">
                 <label>Data de Abertura</label>
-                <input type="date" />
+                <input type="date" @bind="caixaNovo.DataAbertura" />
             </div>
 
             <div class="grupo-input">
                 <label>Data de Fechamento</label>
-                <input type="date" />
+                <input type="date" @bind="caixaNovo.DataFechamento" />
             </div>
 
             <div class="grupo-input">
                 <label>Valor Inicial (R$)</label>
-                <input type="number" step="0.01" placeholder="0.00" />
+                <input type="number" step="0.01" placeholder="0.00" @bind="caixaNovo.ValorInicial" />
             </div>
 
             <div class="grupo-input">
                 <label>Valor Final (R$)</label>
-                <input type="number" step="0.01" placeholder="0.00" />
+                <input type="number" step="0.01" placeholder="0.00" @bind="caixaNovo.ValorFinal" />
             </div>
 
             <div class="grupo-input">
                 <label>ID do Funcionário</label>
-                <input type="number" placeholder="Digite o ID do funcionário" />
+                <input type="number" placeholder="Digite o ID do funcionário" @bind="caixaNovo.IdFuncionario" />
             </div>
 
             <div class="botoes">
-                <button class="btn-salvar">Salvar</button>
-                <button class="btn-limpar">Limpar</button>
+                <button class="btn-salvar" @onclick="Salvar">Salvar</button>
+                <button class="btn-limpar" @onclick="Limpar">Limpar</button>
             </div>
         </div>
 
@@ -217,29 +224,44 @@
 
 @code {
     private List<AppPapelaria1.Model.Caixa> caixas { get; set; } = new();
+    private AppPapelaria1.Model.Caixa caixaNovo { get; set; } = new Caixa { DataAbertura = DateTime.Now, DataFechamento = DateTime.Now };
     private string? MensagemErro { get; set; }
 
     protected override Task OnInitializedAsync()
     {
+        CarregarCaixas();
+        return Task.CompletedTask;
+    }
+
+    private void CarregarCaixas()
+    {
         try
         {
             caixas = CaixaP.Listar();
+            MensagemErro = null;
         }
         catch (Exception ex)
         {
-            MensagemErro = ex.Message;
+            MensagemErro = "Erro ao carregar caixas: " + ex.Message;
         }
-
-        return Task.CompletedTask;
     }
-    // Declarando as variáveis usadas nos inputs (@bind="valorInicial") e na tela
-    private decimal valorInicial { get; set; }
-    private decimal totalEntradas { get; set; }
-    private decimal totalSaidas { get; set; }
 
-    // Declarando o método chamado no botão do caixa
-    private void AbrirCaixa()
+    private void Salvar()
     {
-        // Sua lógica para abrir caixa aqui...
+        try
+        {
+            CaixaP.Inserir(caixaNovo);
+            Limpar();
+            CarregarCaixas();
+        }
+        catch (Exception ex)
+        {
+            MensagemErro = "Erro ao salvar caixa: " + ex.Message;
+        }
+    }
+
+    private void Limpar()
+    {
+        caixaNovo = new Caixa { DataAbertura = DateTime.Now, DataFechamento = DateTime.Now };
     }
 }
