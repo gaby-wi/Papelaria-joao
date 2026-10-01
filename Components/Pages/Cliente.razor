@@ -1,7 +1,10 @@
 ﻿@page "/cliente"
+@rendermode InteractiveServer
+
 @inject ClienteDAO ClienteP
-@using AppPapelaria1.Model;
-@using AppPapelaria1.DAO;
+
+@using AppPapelaria1.Model
+@using AppPapelaria1.DAO
 
 <div class="container">
 
@@ -9,14 +12,7 @@
 
         <div class="card">
 
-            <h1>Cliente</h1>
-            @*id_cli int auto_increment primary key,
-            nome_cli varchar(150) not null,
-            telefone_cli varchar(30),
-            sexo_cli varchar(100),
-            endereco_cli varchar (100),
-            cpf_cli varchar(20),
-            email_cli varchar (100)*@
+            <h1>Cadastro de Cliente</h1>
 
             <div class="grupo-input">
                 <label>Nome do Cliente</label>
@@ -47,26 +43,31 @@
             </div>
 
             <div class="grupo-input">
-                <label>Sexo:</label>
+                <label>Sexo</label>
                 <input type="text"
                        @bind="sexo"
                        placeholder="ex: Masculino" />
             </div>
 
             <div class="grupo-input">
-                <label>Endereço:</label>
+                <label>Endereço</label>
                 <input type="text"
                        @bind="endereco"
                        placeholder="ex: Rua das Flores, 123" />
             </div>
 
-            <!-- Botões de Ação -->
             <div class="grupo-botoes">
-                <button class="btn-primary" @onclick="Cadastrar">+ Cadastrar Cliente</button>
-                <button class="btn-secondary">Cancelar</button>
+
+                <button class="btn-primary" @onclick="Cadastrar">
+                    + Cadastrar Cliente
+                </button>
+
+                <button class="btn-secondary" @onclick="Limpar">
+                    Cancelar
+                </button>
+
             </div>
 
-            <!-- Mensagem de Retorno -->
             @if (!string.IsNullOrEmpty(mensagem))
             {
                 <p class="mensagem">@mensagem</p>
@@ -78,8 +79,8 @@
 
 </div>
 
-<!-- Estilização CSS -->
 <style>
+
     .container {
         display: flex;
         justify-content: center;
@@ -103,7 +104,6 @@
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 20px;
-            justify-content: center;
         }
 
     .grupo-input {
@@ -178,6 +178,7 @@
         font-weight: 600;
         color: #6b21a8;
     }
+
 </style>
 
 @code {
@@ -188,7 +189,6 @@
     string email = "";
     string sexo = "";
     string endereco = "";
-
     string mensagem = "";
 
     void Cadastrar()
@@ -199,8 +199,24 @@
             return;
         }
 
+        AppPapelaria1.Model.Cliente cliente = new AppPapelaria1.Model.Cliente();
+
+        cliente.Nome = nome;
+        cliente.CPF = cpf;
+        cliente.Telefone = telefone;
+        cliente.Email = email;
+        cliente.Sexo = sexo;
+        cliente.Endereco = endereco;
+
+        ClienteP.Cadastrar(cliente);
+
         mensagem = "Cliente cadastrado com sucesso!";
 
+        Limpar();
+    }
+
+    void Limpar()
+    {
         nome = "";
         cpf = "";
         telefone = "";
