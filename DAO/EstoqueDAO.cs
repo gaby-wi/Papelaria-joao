@@ -11,6 +11,25 @@ namespace AppPapelaria1.DAO
             _conexao = conexao;
         }
 
+        public void Inserir(Estoque estoque)
+        {
+            try
+            {
+                // Buscando a Conexão com o banco de dados
+                using var con = _conexao.GetConnection();
+                string sql = "INSERT INTO estoque (quantidade_inicial_est, quantidade_final_est, id_pro_fk) VALUES (@quantidade_inicial_est, @quantidade_final_est, @id_pro_fk)";
+                using var comando = con.CreateCommand();
+                comando.CommandText = sql;
+                comando.Parameters.AddWithValue("@quantidade_inicial_est", estoque.QuantidadeInicial);
+                comando.Parameters.AddWithValue("@quantidade_final_est", estoque.QuantidadeFinal);
+                comando.Parameters.AddWithValue("@id_pro_fk", estoque.IdProduto);
+                comando.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public List<Estoque> Listar()
         {
             try
