@@ -1,5 +1,5 @@
-@page "/estoque"
-@inject EstoqueDAO estoqueDAO
+﻿@page "/produto"
+@inject ProdutoDAO produtoDAO
 @inject AppPapelaria1.Config.Conexao Conexao
 @using AppPapelaria1.Model;
 @using AppPapelaria1.DAO;
@@ -9,49 +9,49 @@
     <div class="conteudo">
 
         <div class="card">
-            @* id_est int auto_increment primary key,
-               quantidade_inicial_est varchar(100),
-               quantidade_final_est int,
-               id_pro_fk int,
-               foreign key (id_pro_fk) references Produto(id_pro) *@
+            @* id_pro int auto_increment primary key,
+               nome_pro varchar(100),
+               preco_pro float,
+               id_cate_fk int,
+               foreign key (id_cate_fk) references Categoria(id_cate) *@
 
-            <h2>Controle de Estoque</h2>
+            <h2>Cadastro de Produto</h2>
 
-            <!-- Id do Estoque -->
+            <!-- Id do Produto -->
             <div class="grupo-input">
-                <label>Id do Estoque</label>
+                <label>Id do Produto</label>
                 <input type="text"
                        @bind="id"
                        placeholder="ex: 1" />
             </div>
 
-            <!-- Quantidade Inicial -->
+            <!-- Nome do Produto -->
             <div class="grupo-input">
-                <label>Quantidade Inicial</label>
+                <label>Nome do Produto</label>
                 <input type="text"
-                       @bind="quantidadeInicial"
-                       placeholder="ex: 100" />
+                       @bind="nome"
+                       placeholder="ex: Caderno Universitário" />
             </div>
 
-            <!-- Quantidade Final -->
+            <!-- Preço -->
             <div class="grupo-input">
-                <label>Quantidade Final</label>
-                <input type="number"
-                       @bind="quantidadeFinal"
-                       placeholder="ex: 85" />
+                <label>Preço (R$)</label>
+                <input type="number" step="0.01"
+                       @bind="preco"
+                       placeholder="ex: 25.50" />
             </div>
 
-            <!-- Id do Produto (FK) -->
+            <!-- Id da Categoria (FK) -->
             <div class="grupo-input">
-                <label>Id do Produto</label>
+                <label>Id da Categoria</label>
                 <input type="number"
-                       @bind="idProduto"
-                       placeholder="ex: 10" />
+                       @bind="idCategoria"
+                       placeholder="ex: 2" />
             </div>
 
             <!-- Botões de Ação -->
             <div class="grupo-botoes">
-                <button class="btn-primary" @onclick="Cadastrar">+ Cadastrar Estoque</button>
+                <button class="btn-primary" @onclick="Cadastrar">+ Cadastrar Produto</button>
                 <button class="btn-secondary" @onclick="Limpar">Cancelar</button>
             </div>
 
@@ -170,29 +170,53 @@
 
 @code {
     string id = "";
-    string quantidadeInicial = "";
-    int quantidadeFinal;
-    int? idProduto;
+    string nome = "";
+    float preco = 0;
+    int idCategoria = 0;
 
     string mensagem = "";
 
     void Cadastrar()
     {
-        if (string.IsNullOrWhiteSpace(quantidadeInicial) || idProduto == null || idProduto <= 0)
+        if (string.IsNullOrWhiteSpace(nome) || preco <= 0 || idCategoria <= 0)
         {
-            mensagem = "Preencha os campos obrigatórios e um ID de Produto válido.";
+            mensagem = "Preencha todos os campos obrigatórios corretamente.";
             return;
         }
 
-        mensagem = "Estoque cadastrado com sucesso!";
-        Limpar();
+        try
+        {
+            // Especificando AppPapelaria1.Model.Produto para tirar a ambiguidade:
+            var p = new AppPapelaria1.Model.Produto
+            {
+                Nome = nome,
+                Preco = preco,
+                IdCategoria = idCategoria
+            };
+
+            bool sucesso = produtoDAO.Inserir(p);
+
+            if (sucesso)
+            {
+                mensagem = "Produto cadastrado com sucesso!";
+                Limpar();
+            }
+            else
+            {
+                mensagem = "Erro ao cadastrar produto no banco de dados.";
+            }
+        }
+        catch (Exception ex)
+        {
+            mensagem = $"Erro: {ex.Message}";
+        }
     }
 
     void Limpar()
     {
         id = "";
-        quantidadeInicial = "";
-        quantidadeFinal = 0;
-        idProduto = null;
+        nome = "";
+        preco = 0;
+        idCategoria = 0;
     }
 }

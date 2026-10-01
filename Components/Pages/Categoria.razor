@@ -1,6 +1,5 @@
-@page "/estoque"
-@inject EstoqueDAO estoqueDAO
-@inject AppPapelaria1.Config.Conexao Conexao
+﻿@page "/categoria"
+@inject CategoriaDAO CategoriaP
 @using AppPapelaria1.Model;
 @using AppPapelaria1.DAO;
 
@@ -9,50 +8,29 @@
     <div class="conteudo">
 
         <div class="card">
-            @* id_est int auto_increment primary key,
-               quantidade_inicial_est varchar(100),
-               quantidade_final_est int,
-               id_pro_fk int,
-               foreign key (id_pro_fk) references Produto(id_pro) *@
+            @*id_cate int auto_increment primary key,
+            nome_cate varchar(100)*@
 
-            <h2>Controle de Estoque</h2>
+            <h2>Categoria</h2>
 
-            <!-- Id do Estoque -->
             <div class="grupo-input">
-                <label>Id do Estoque</label>
+                <label>Id Categoria</label>
                 <input type="text"
                        @bind="id"
                        placeholder="ex: 1" />
             </div>
 
-            <!-- Quantidade Inicial -->
             <div class="grupo-input">
-                <label>Quantidade Inicial</label>
+                <label>Nome da Categoria</label>
                 <input type="text"
-                       @bind="quantidadeInicial"
-                       placeholder="ex: 100" />
-            </div>
-
-            <!-- Quantidade Final -->
-            <div class="grupo-input">
-                <label>Quantidade Final</label>
-                <input type="number"
-                       @bind="quantidadeFinal"
-                       placeholder="ex: 85" />
-            </div>
-
-            <!-- Id do Produto (FK) -->
-            <div class="grupo-input">
-                <label>Id do Produto</label>
-                <input type="number"
-                       @bind="idProduto"
-                       placeholder="ex: 10" />
+                       @bind="nome"
+                       placeholder="ex: Eletronicos" />
             </div>
 
             <!-- Botões de Ação -->
             <div class="grupo-botoes">
-                <button class="btn-primary" @onclick="Cadastrar">+ Cadastrar Estoque</button>
-                <button class="btn-secondary" @onclick="Limpar">Cancelar</button>
+                <button class="btn-primary" @onclick="Cadastrar">+ Cadastrar Categoria</button>
+                <button class="btn-secondary">Cancelar</button>
             </div>
 
             <!-- Mensagem de Retorno -->
@@ -170,29 +148,19 @@
 
 @code {
     string id = "";
-    string quantidadeInicial = "";
-    int quantidadeFinal;
-    int? idProduto;
-
+    string nome = "";
     string mensagem = "";
 
     void Cadastrar()
     {
-        if (string.IsNullOrWhiteSpace(quantidadeInicial) || idProduto == null || idProduto <= 0)
+        if (string.IsNullOrWhiteSpace(nome))
         {
-            mensagem = "Preencha os campos obrigatórios e um ID de Produto válido.";
+            mensagem = "Preencha o nome da categoria.";
             return;
         }
 
-        mensagem = "Estoque cadastrado com sucesso!";
-        Limpar();
-    }
-
-    void Limpar()
-    {
+        mensagem = "Categoria cadastrada com sucesso!";
         id = "";
-        quantidadeInicial = "";
-        quantidadeFinal = 0;
-        idProduto = null;
+        nome = "";
     }
 }

@@ -1,0 +1,302 @@
+﻿@page "/financeiro"
+@inject AppPapelaria1.Config.Conexao Conexao
+@inject IJSRuntime JS
+@inject FinanceiroDAO financeiroDAO
+@using AppPapelaria1.Model;
+@using AppPapelaria1.DAO;
+
+<div class="container">
+
+    <div class="conteudo">
+
+        <div class="card">
+            @* id_fin int auto_increment primary key,
+               tipo_fin varchar(100),
+               valor_fin float,
+               data_fin date,
+
+               id_fun_fk int not null,
+               foreign key (id_fun_fk) references Funcionario(id_fun),
+
+               id_vend_fk int not null,
+               foreign key (id_vend_fk) references Venda(id_vend) *@
+
+            <h2>Cadastro Financeiro</h2>
+
+            <!-- Tipo de Movimentação -->
+            <div class="grupo-input">
+                <label>Tipo de Movimentação</label>
+                <select @bind="tipo">
+                    <option>Entrada</option>
+                    <option>Saída</option>
+                </select>
+            </div>
+
+            <!-- Descrição -->
+            <div class="grupo-input">
+                <label>Descrição</label>
+                <input type="text"
+                       @bind="descricao"
+                       placeholder="ex: Pagamento de fornecedor" />
+            </div>
+
+            <!-- Valor -->
+            <div class="grupo-input">
+                <label>Valor (R$)</label>
+                <input type="number" step="0.01"
+                       @bind="valor"
+                       placeholder="ex: 150.00" />
+            </div>
+
+            <!-- Forma de Pagamento -->
+            <div class="grupo-input">
+                <label>Forma de Pagamento</label>
+                <select @bind="formaPagamento">
+                    <option>Dinheiro</option>
+                    <option>Pix</option>
+                    <option>Cartão de Crédito</option>
+                    <option>Cartão de Débito</option>
+                    <option>Boleto</option>
+                </select>
+            </div>
+
+            <!-- Data -->
+            <div class="grupo-input">
+                <label>Data</label>
+                <input type="date"
+                       @bind="data" />
+            </div>
+
+            <!-- Chaves Estrangeiras -->
+            <div class="grupo-input">
+                <label>Id do Funcionário</label>
+                <input type="text"
+                       @bind="idFuncionario"
+                       placeholder="ex: 1" />
+            </div>
+
+            <div class="grupo-input">
+                <label>Id da Venda</label>
+                <input type="text"
+                       @bind="idVenda"
+                       placeholder="ex: 10" />
+            </div>
+
+            <!-- Observação -->
+            <div class="grupo-input">
+                <label>Observação</label>
+                <input type="text"
+                       @bind="observacao"
+                       placeholder="ex: Observações adicionais" />
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="grupo-botoes">
+                <button class="btn-primary" @onclick="CadastrarMovimentacao">+ Salvar Movimentação</button>
+                <button class="btn-secondary" @onclick="Limpar">Cancelar</button>
+            </div>
+
+            <!-- Mensagem de Retorno -->
+            @if (!string.IsNullOrEmpty(mensagem))
+            {
+                <p class="mensagem">@mensagem</p>
+            }
+
+        </div>
+
+        <!-- Card Resumo Financeiro -->
+        <div class="card card-resumo">
+            <h2>Resumo Financeiro</h2>
+            <div class="resumo-item">
+                <span>Receitas:</span>
+                <strong class="texto-sucesso">R$ @totalReceitas.ToString("F2")</strong>
+            </div>
+            <div class="resumo-item">
+                <span>Despesas:</span>
+                <strong class="texto-perigo">R$ @totalDespesas.ToString("F2")</strong>
+            </div>
+            <div class="resumo-item">
+                <span>Saldo:</span>
+                <strong>R$ @saldo.ToString("F2")</strong>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Estilização CSS -->
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .conteudo {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-bottom: 24px;
+    }
+
+        .card h2 {
+            color: #8b5cf6;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+    .grupo-input {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 16px;
+    }
+
+        .grupo-input label {
+            color: #4b5563;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .grupo-input input, .grupo-input select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9d5ff;
+            border-radius: 12px;
+            outline: none;
+            font-size: 14px;
+            color: #374151;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+            .grupo-input input:focus, .grupo-input select:focus {
+                border-color: #8b5cf6;
+            }
+
+    .grupo-botoes {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .btn-primary {
+        flex: 1;
+        background-color: #a855f7;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+        .btn-primary:hover {
+            background-color: #9333ea;
+        }
+
+    .btn-secondary {
+        flex: 1;
+        background-color: #f3e8ff;
+        color: #7e22ce;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+        .btn-secondary:hover {
+            background-color: #e9d5ff;
+        }
+
+    .mensagem {
+        margin-top: 16px;
+        font-weight: 600;
+        color: #6b21a8;
+    }
+
+    /* Estilos adicionais para o Resumo */
+    .resumo-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        font-size: 16px;
+        border-bottom: 1px solid #f3e8ff;
+    }
+
+        .resumo-item:last-child {
+            border-bottom: none;
+        }
+
+    .texto-sucesso {
+        color: #16a34a;
+    }
+
+    .texto-perigo {
+        color: #dc2626;
+    }
+</style>
+
+@code {
+    string tipo = "Entrada";
+    string descricao = "";
+    decimal valor = 0;
+    string formaPagamento = "Dinheiro";
+    DateTime data = DateTime.Today;
+    string idFuncionario = "";
+    string idVenda = "";
+    string observacao = "";
+
+    string mensagem = "";
+
+    decimal totalReceitas = 0;
+    decimal totalDespesas = 0;
+    decimal saldo = 0;
+
+    void CadastrarMovimentacao()
+    {
+        if (valor <= 0 || string.IsNullOrWhiteSpace(idFuncionario) || string.IsNullOrWhiteSpace(idVenda))
+        {
+            mensagem = "Preencha o valor e os Ids de referência corretamente.";
+            return;
+        }
+
+        if (tipo == "Entrada")
+        {
+            totalReceitas += valor;
+        }
+        else
+        {
+            totalDespesas += valor;
+        }
+
+        saldo = totalReceitas - totalDespesas;
+        mensagem = $"{tipo} cadastrada com sucesso!";
+
+        Limpar();
+    }
+
+    void Limpar()
+    {
+        tipo = "Entrada";
+        descricao = "";
+        valor = 0;
+        formaPagamento = "Dinheiro";
+        data = DateTime.Today;
+        idFuncionario = "";
+        idVenda = "";
+        observacao = "";
+    }
+}

@@ -1,159 +1,98 @@
-﻿
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+﻿.container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }
-
-body {
-    background: #f4edff;
-}
-
-.container {
-    width: 100%;
-    min-height: 100vh;
-    background: #f4edff;
-    padding: 30px;
-}
-
-.topo {
-    background: linear-gradient(90deg,#c8a2ff,#9d63ff);
-    color: white;
-    padding: 25px;
-    border-radius: 20px;
-    margin-bottom: 25px;
-    box-shadow: 0 8px 25px rgba(120,81,169,0.2);
-}
-
-    .topo h1 {
-        font-size: 32px;
-    }
-
-    .topo p {
-        margin-top: 8px;
-    }
 
 .conteudo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    width: 100%;
+    max-width: 600px;
 }
 
 .card {
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 8px 25px rgba(120,81,169,0.15);
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
     .card h2 {
-        color: #7b3fe4;
+        color: #8b5cf6;
+        font-size: 24px;
+        font-weight: 600;
         margin-bottom: 20px;
     }
 
 .grupo-input {
-    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
 }
 
     .grupo-input label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: #5d4d75;
+        color: #4b5563;
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 6px;
     }
 
-    .grupo-input input,
-    .grupo-input select,
-    .grupo-input textarea {
+    .grupo-input input, .grupo-input select {
         width: 100%;
-        padding: 12px;
-        border-radius: 10px;
-        border: 2px solid #d9c3ff;
+        padding: 12px 16px;
+        border: 2px solid #e9d5ff;
+        border-radius: 12px;
         outline: none;
-        font-size: 15px;
+        font-size: 14px;
+        color: #374151;
+        background-color: #ffffff;
+        box-sizing: border-box;
+        transition: border-color 0.2s;
     }
 
-    .grupo-input textarea {
-        height: 100px;
-        resize: none;
-    }
-
-        .grupo-input input:focus,
-        .grupo-input select:focus,
-        .grupo-input textarea:focus {
-            border-color: #9d63ff;
+        .grupo-input input:focus, .grupo-input select:focus {
+            border-color: #8b5cf6;
         }
 
-botoes {
+.grupo-botoes {
     display: flex;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 12px;
+    margin-top: 24px;
 }
 
-button {
+.btn-primary {
     flex: 1;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-salvar {
-    background: #9d63ff;
+    background-color: #a855f7;
     color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-    .btn-salvar:hover {
-        background: #8649f0;
+    .btn-primary:hover {
+        background-color: #9333ea;
     }
 
-.btn-limpar {
-    background: #eadcff;
-    color: #6b35c7;
+.btn-secondary {
+    flex: 1;
+    background-color: #f3e8ff;
+    color: #7e22ce;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-    .btn-limpar:hover {
-        background: #d9c0ff;
+    .btn-secondary:hover {
+        background-color: #e9d5ff;
     }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.mensagem {
+    margin-top: 16px;
+    font-weight: 600;
+    color: #6b21a8;
 }
-
-    table th {
-        background: #b88cff;
-        color: white;
-        padding: 12px;
-    }
-
-    table td {
-        padding: 12px;
-        text-align: center;
-        border-bottom: 1px solid #e7d9ff;
-    }
-
-    table tr:hover {
-        background: #f6efff;
-    }
-
-.status {
-    background: #d9c4ff;
-    color: #5e2db0;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-@media(max-width:900px) {
-
-    .conteudo {
-        grid-template-columns: 1fr;
-    }
-}
-
