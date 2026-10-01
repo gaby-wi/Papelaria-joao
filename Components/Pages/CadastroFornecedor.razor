@@ -1,3 +1,9 @@
+@* <<<<<<< HEAD
+﻿<h3>CadastroFornecedor</h3>
+
+@code {
+
+=======
 ﻿@page "/cadastrofornecedor"
 @inject IJSRuntime JS
 
@@ -102,5 +108,80 @@
     private async Task VoltarPagina()
     {
         await JS.InvokeVoidAsync("history.back");
+    }
+>>>>>>> dc28c4b269a94dfffa276d336cb5e0c6351815c5
+}
+ *@
+
+@page "/fornecedor/cadastro"
+@rendermode InteractiveServer
+@using AppPapelaria1.Model
+@inject FornecedorDAO dao
+@inject NavigationManager NavigationManager
+
+<PageTitle>Novo Fornecedor - Sistema de Controle de Fornecedores</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">Cadastro de Fornecedor</h2>
+    </div>
+</div>
+
+<div class="custom-table-card p-4">
+    <EditForm Model="fornecedor" OnValidSubmit="Salvar">
+        <DataAnnotationsValidator />
+        <ValidationSummary class="alert alert-danger" />
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="nome" class="form-label">Nome</label>
+                <InputText id="nome" class="form-control" @bind-Value="fornecedor.Nome" />
+                <ValidationMessage For="() => fornecedor.Nome" />
+            </div>
+            <div class="col-md-6">
+                <label for="cnpj" class="form-label">CNPJ</label>
+                <InputText id="cnpj" class="form-control" @bind-Value="fornecedor.Cnpj" />
+                <ValidationMessage For="() => fornecedor.Cnpj" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="telefone" class="form-label">Telefone</label>
+                <InputText id="telefone" class="form-control" @bind-Value="fornecedor.Telefone" />
+                <ValidationMessage For="() => fornecedor.Telefone" />
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">E-mail</label>
+                <InputText id="email" class="form-control" @bind-Value="fornecedor.Email" />
+                <ValidationMessage For="() => fornecedor.Email" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="endereco" class="form-label">Endereço</label>
+                <InputText id="endereco" class="form-control" @bind-Value="fornecedor.Endereco" />
+                <ValidationMessage For="() => fornecedor.Endereco" />
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg"></i> Salvar
+            </button>
+            <a href="/fornecedores" class="btn btn-light border"> Cancelar </a>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private Fornecedor fornecedor = new();
+
+    private void Salvar()
+    {
+        dao.Inserir(fornecedor);
+        // Retorna à listagem de fornecedores após salvar
+        NavigationManager.NavigateTo("/fornecedores");
     }
 }
