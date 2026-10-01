@@ -1,24 +1,6 @@
-﻿@page "/fornecedor"
-@inject FornecedorDAO FornecedorP
-@inject AppPapelaria1.Config.Conexao Conexao
-@using AppPapelaria1.Model;
-@using AppPapelaria1.DAO;
+﻿
 
-
-<div class="container">
-
-
-    <div class="conteudo">
-
-        <div class="card">
-            @* id_for int auto_increment primary key,
-            nome_fantasia_for varchar(150) not null,
-            telefone_for varchar(30),
-            endereco_for varchar (100),
-            cnpj_for varchar(20),
-            email_for varchar (100) *@
-
-            <h2>Fornecedor</h2>
+            @* <h2>Fornecedor</h2>
 
             <div class="grupo-input">
                 <label>Id do Fornecedor</label>
@@ -86,6 +68,6 @@
         @*var categoriaDAO = new CategoriaDAO(Conexao);
         categorias = categoriaDAO.Listar();*@
 
-        return Task.CompletedTask;
+        @* return Task.CompletedTask; *@ *@
     }
-}
+} 
