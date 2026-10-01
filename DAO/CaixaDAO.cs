@@ -1,12 +1,14 @@
 namespace AppPapelaria1.DAO;
+
 using AppPapelaria1.Config;
 using AppPapelaria1.Model;
 
-public class CaixaDAO { 
-
+public class CaixaDAO
+{
     private readonly Conexao _conexao;
 
-    public CaixaDAO(Conexao conexao) { 
+    public CaixaDAO(Conexao conexao)
+    {
         _conexao = conexao;
     }
 
@@ -45,6 +47,32 @@ public class CaixaDAO {
             throw;
         }
     }
-}
 
-            
+    public void Inserir(Caixa caixa)
+    {
+        try
+        {
+            using var con = _conexao.GetConnection();
+
+            string sql = @"INSERT INTO Caixa 
+                (data_abertura_cai, data_fechamento_cai, valor_inicial_cai, valor_final_cai, id_fun_fk) 
+                VALUES 
+                (@dataAbertura, @dataFechamento, @valorInicial, @valorFinal, @idFuncionario)";
+
+            using var comando = con.CreateCommand();
+            comando.CommandText = sql;
+
+            comando.Parameters.AddWithValue("@dataAbertura", caixa.DataAbertura);
+            comando.Parameters.AddWithValue("@dataFechamento", caixa.DataFechamento);
+            comando.Parameters.AddWithValue("@valorInicial", caixa.ValorInicial);
+            comando.Parameters.AddWithValue("@valorFinal", caixa.ValorFinal);
+            comando.Parameters.AddWithValue("@idFuncionario", caixa.IdFuncionario);
+
+            comando.ExecuteNonQuery();
+        }
+        catch
+        {
+            throw;
+        }
+    }
+}

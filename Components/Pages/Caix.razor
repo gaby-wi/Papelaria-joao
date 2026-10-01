@@ -21,6 +21,7 @@
 
                 <input class="form-control mb-3"
                        type="number"
+                       step="0.01"
                        @bind="valorInicial" />
 
                 <button class="btn btn-primary" @onclick="AbrirCaixa">
@@ -80,20 +81,20 @@
                         <th>Data Fechamento</th>
                         <th>Valor Inicial</th>
                         <th>Valor Final</th>
-                        <th>Status</th>
+                        <th>Funcionário</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                   
                     @foreach (var c in caixas)
                     {
                         <tr>
-
                             <td>@c.Id</td>
 
                             <td>
-                                @c.DataAbertura.ToString("dd/MM/yyyy")
+                                @(c.DataAbertura.HasValue
+                                    ? c.DataAbertura.Value.ToString("dd/MM/yyyy")
+                                    : "-")
                             </td>
 
                             <td>
@@ -107,36 +108,25 @@
                             </td>
 
                             <td>
-                                @(c.ValorFinal.HasValue
-                                    ? $"R$ {c.ValorFinal.Value:F2}"
-                                    : "-")
+                                R$ @c.ValorFinal.ToString("F2")
                             </td>
 
                             <td>
-                                <span class="badge @(c.Status == "Aberto"
-                                    ? "bg-success"
-                                    : "bg-secondary")">
-
-                                    @c.Status
-
-                                </span>
+                                @c.IdFuncionario
                             </td>
-
                         </tr>
                     }
-
                 </tbody>
 
             </table>
         }
 
     </div>
-
 </div>
 
 @code {
 
-    private List<Caix> caixas = new();
+    private List<AppPapelaria1.Model.Caixa> caixas = new();
 
     private float valorInicial;
 
@@ -146,32 +136,30 @@
 
     protected override void OnInitialized()
     {
-        // Correção aqui: utiliza a variável injetada "caixaDAO" em minúsculo
+        CarregarCaixas();
+    }
+
+    private void CarregarCaixas()
+    {
         caixas = caixaDAO.Listar();
     }
 
     private void AbrirCaixa()
     {
-        Console.WriteLine("Valor inicial: " + valorInicial);
-    }
+        // Cria um novo objeto Caixa com o valor inserido e salva via DAO
+        var novoCaixa = new AppPapelaria1.Model.Caixa
+        {
+            DataAbertura = DateTime.Now,
+            DataFechamento = DateTime.Now,
+            ValorInicial = valorInicial,
+            ValorFinal = valorInicial,
+            IdFuncionario = 1 // Substitua pelo ID do funcionário logado
+        };
 
+        caixaDAO.Inserir(novoCaixa);
+
+        // Limpa o campo do formulário e recarrega a tabela
+        valorInicial = 0;
+        CarregarCaixas();
+    }
 }
-@* @code {
-    private List<AppPapelaria1.Model.Caixa> caixas { get; set; } = [];
-    private string? MensagemErro { get; set; }
-
-    private float valorInicial;
-
-    private float totalEntradas = 1250;
-
-    private float totalSaidas = 150;
-
-    private float abrirCaixa = 1;
-
-    protected override Task OnInitializedAsync()
-    {
-        caixas = caixaDAO.Listar();
-
-        return Task.CompletedTask;
-    }
-} *@

@@ -68,10 +68,25 @@
                     @foreach (var cai in caixas)
                     {
                         <tr>
-                            <td>@cai.DataAbertura.ToString("dd/MM/yyyy")</td>
-                            <td>@cai.DataFechamento.ToString("dd/MM/yyyy")</td>
-                            <td>@cai.ValorInicial.ToString("C")</td>
-                            <td>@cai.ValorFinal.ToString("C")</td>
+                            <td>
+                                @(cai.DataAbertura.HasValue
+                                    ? cai.DataAbertura.Value.ToString("dd/MM/yyyy")
+                                    : "-")
+                            </td>
+
+                            <td>
+                                @(cai.DataFechamento.HasValue
+                                    ? cai.DataFechamento.Value.ToString("dd/MM/yyyy")
+                                    : "-")
+                            </td>
+
+                            <td>
+                                R$ @cai.ValorInicial.ToString("F2")
+                            </td>
+
+                            <td>
+                                R$ @cai.ValorFinal.ToString("F2")
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -223,8 +238,10 @@
 </style>
 
 @code {
+    @inject AppPapelaria1.DAO.CaixaDAO caixaDAO
+
     private List<AppPapelaria1.Model.Caixa> caixas { get; set; } = new();
-    private AppPapelaria1.Model.Caixa caixaNovo { get; set; } = new Caixa { DataAbertura = DateTime.Now, DataFechamento = DateTime.Now };
+    private AppPapelaria1.Model.Caixa caixaNovo { get; set; } = new AppPapelaria1.Model.Caixa { DataAbertura = DateTime.Now, DataFechamento = DateTime.Now };
     private string? MensagemErro { get; set; }
 
     protected override Task OnInitializedAsync()
@@ -237,7 +254,7 @@
     {
         try
         {
-            caixas = CaixaP.Listar();
+            caixas = caixaDAO.Listar();
             MensagemErro = null;
         }
         catch (Exception ex)
@@ -250,7 +267,7 @@
     {
         try
         {
-            CaixaP.Inserir(caixaNovo);
+            caixaDAO.Inserir(caixaNovo);
             Limpar();
             CarregarCaixas();
         }
@@ -262,6 +279,6 @@
 
     private void Limpar()
     {
-        caixaNovo = new Caixa { DataAbertura = DateTime.Now, DataFechamento = DateTime.Now };
+        caixaNovo = new AppPapelaria1.Model.Caixa { DataAbertura = DateTime.Now, DataFechamento = DateTime.Now };
     }
 }
