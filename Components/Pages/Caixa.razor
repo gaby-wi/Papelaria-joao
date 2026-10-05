@@ -4,9 +4,15 @@
 @using AppPapelaria1.Model;
 @using AppPapelaria1.DAO;
 @inject CaixaDAO caixaDAO
+@inject NavigationManager Navigation
 
 <div class="container-fluid">
     <div class="conteudo">
+
+        <!-- BOTÃO VOLTAR -->
+        <div class="topo-acoes">
+            <button class="btn-voltar" @onclick="VoltarInicio">← Voltar ao Início</button>
+        </div>
 
         <h1>Caixa</h1>
 
@@ -61,10 +67,12 @@
             <table>
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Abertura</th>
                         <th>Fechamento</th>
                         <th>Inicial</th>
                         <th>Final</th>
+                        <th>Func.</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +81,8 @@
                         @foreach (var cai in caixas)
                         {
                             <tr>
+                                <td><strong>#@cai.Id</strong></td>
+
                                 <td>
                                     @(cai.DataAbertura.HasValue
                                         ? cai.DataAbertura.Value.ToString("dd/MM/yyyy")
@@ -94,13 +104,15 @@
                                         ? $"R$ {cai.ValorFinal.Value:F2}" 
                                         : "-")
                                 </td>
+
+                                <td>@cai.IdFuncionario</td>
                             </tr>
                         }
                     }
                     else
                     {
                         <tr>
-                            <td colspan="4" style="text-align:center;">Nenhum registo encontrado.</td>
+                            <td colspan="6" style="text-align:center;">Nenhum registo encontrado.</td>
                         </tr>
                     }
                 </tbody>
@@ -120,6 +132,27 @@
     .conteudo {
         width: 100%;
         max-width: 700px;
+    }
+
+    .topo-acoes {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 12px;
+    }
+
+    .btn-voltar {
+        background-color: #f3e8ff;
+        color: #7e22ce;
+        border: 1px solid #e9d5ff;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .btn-voltar:hover {
+        background-color: #e9d5ff;
     }
 
     .conteudo h1 {
@@ -269,7 +302,6 @@
     {
         try
         {
-            // Validação simples
             if (caixaNovo.IdFuncionario <= 0)
             {
                 MensagemErro = "Informe um ID de funcionário válido (ex: 1, 2, 3).";
@@ -282,7 +314,6 @@
         }
         catch (Exception ex)
         {
-            // Exibe a exceção detalhada caso o MySQL rejeite a gravação
             MensagemErro = "Erro ao salvar no banco: " + ex.Message;
         }
     }
@@ -297,5 +328,10 @@
         MensagemErro = null;
     }
 
-
+    private void VoltarInicio()
+    {
+        Navigation.NavigateTo("/");
+    }
 }
+
+```s
