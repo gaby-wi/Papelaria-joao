@@ -1,6 +1,7 @@
-@page "/funcionario/cadastro"
+
 ﻿@page "/Index"
 
+>>>>>>> Stashed changes
 @inject AppPapelaria1.Config.Conexao Conexao
 @using AppPapelaria1.Model
 @using AppPapelaria1.DAO
@@ -96,49 +97,6 @@
     </div>
 </div>
 
-@code {
-    private string nome = "";
-    private string cpf = "";
-    private string senha = "";
-    private string telefone = "";
-    private string sexo = "";
-    private string endereco = "";
-    private string email = "";
-    private string mensagem = "";
-
-    private void Cadastrar()
-    {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(nome) || string.IsNullOrWhiteSpace(cpf))
-            {
-                mensagem = "Por favor, preencha pelo menos o Nome e o CPF.";
-                return;
-            }
-
-            var novoFuncionario = new Funcionario
-            {
-                Nome = nome,
-                Cpf = cpf,
-                Senha = senha,
-                Telefone = telefone,
-                Sexo = sexo,
-                Endereco = endereco,
-                Email = email
-            };
-
-            var dao = new FuncionarioDAO(Conexao);
-            dao.Inserir(novoFuncionario);
-
-            mensagem = "Funcionário cadastrado com sucesso!";
-            Limpar();
-        }
-        catch (Exception ex)
-        {
-            mensagem = "Erro ao cadastrar funcionário: " + ex.Message;
-        }
-</div>
-
 
 
 @code {
@@ -154,13 +112,12 @@
     private void Cadastrar()
     {
         mensagem = "Funcionário cadastrado com sucesso!";
-
     }
 
     private void Limpar()
+    {
 
         nome = "";
-
         Nome = "";
         cpf = "";
         senha = "";
@@ -169,5 +126,6 @@
         endereco = "";
         email = "";
         mensagem = "";
+
     }
 }
