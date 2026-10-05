@@ -1,0 +1,105 @@
+﻿<h3>index</h3>
+
+@inject AppPapelaria1.Config.Conexao Conexao
+@using AppPapelaria1.Model;
+@using AppPapelaria1.DAO;
+
+<div class="container">
+
+    <div class="conteudo">
+
+        <div class="card">
+
+            <h2>Cadastro de Funcionário</h2>
+
+            <div class="d-flex justify-content-between align-items-cent
+                er mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">Consulta de Funcionários</h2>
+
+                </div>
+                <div>
+                    <a href="/funcionario/cadastro" class="btn btn-primary">
+                        <i class="bi bi-plus-lg"></i> Novo Funcionário
+
+                    </a>
+                   
+                </div>
+            </div>
+
+            <!-- Nome -->
+            <div class="grupo-input">
+                <label>Nome</label>
+                <input type="text"
+                       @bind="nome"
+                       placeholder="Digite o nome do funcionário" />
+            </div>
+
+            <!-- CPF -->
+            <div class="grupo-input">
+                <label>CPF</label>
+                <input type="text"
+                       @bind="cpf"
+                       placeholder="Digite o CPF" />
+            </div>
+
+            <!-- Senha -->
+            <div class="grupo-input">
+                <label>Senha</label>
+                <input type="password"
+                       @bind="senha"
+                       placeholder="Digite a senha" />
+            </div>
+
+            <!-- Telefone -->
+            <div class="grupo-input">
+                <label>Telefone</label>
+                <input type="text"
+                       @bind="telefone"
+                       placeholder="Digite o telefone" />
+            </div>
+
+            <!-- Sexo -->
+            <div class="grupo-input">
+                <label>Sexo</label>
+                <select @bind="sexo">
+                    <option value="">Selecione o sexo</option>
+                    <option value="Feminino">Feminino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Outro">Outro</option>
+                </select>
+            </div>
+
+            <!-- Endereço -->
+            <div class="grupo-input">
+                <label>Endereço</label>
+                <input type="text"
+                       @bind="endereco"
+                       placeholder="Digite o endereço" />
+            </div>
+
+            <!-- Email -->
+            <div class="grupo-input">
+                <label>Email</label>
+                <input type="email"
+                       @bind="email"
+                       placeholder="Digite o email" />
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="grupo-botoes">
+                <button class="btn-primary" @onclick="Cadastrar">Cadastrar</button>
+                <button class="btn-secondary" @onclick="Limpar">Cancelar</button>
+            </div>
+
+            <!-- Mensagem de Retorno -->
+            @if (!string.IsNullOrEmpty(mensagem))
+            {
+                <p class="mensagem">@mensagem</p>
+            }
+
+        </div>
+
+    </div>
+
+</div>

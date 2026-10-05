@@ -11,22 +11,18 @@
     <Compile Remove="Components\Pages\NovaPasta1\**" />
     <Compile Remove="Components\Pages\NovaPasta2\**" />
     <Compile Remove="Components\Pages\NovaPasta3\**" />
-    <Compile Remove="Components\Pages\NovaPasta\**" />
     <Content Remove="Components\Pages\DAO\**" />
     <Content Remove="Components\Pages\NovaPasta1\**" />
     <Content Remove="Components\Pages\NovaPasta2\**" />
     <Content Remove="Components\Pages\NovaPasta3\**" />
-    <Content Remove="Components\Pages\NovaPasta\**" />
     <EmbeddedResource Remove="Components\Pages\DAO\**" />
     <EmbeddedResource Remove="Components\Pages\NovaPasta1\**" />
     <EmbeddedResource Remove="Components\Pages\NovaPasta2\**" />
     <EmbeddedResource Remove="Components\Pages\NovaPasta3\**" />
-    <EmbeddedResource Remove="Components\Pages\NovaPasta\**" />
     <None Remove="Components\Pages\DAO\**" />
     <None Remove="Components\Pages\NovaPasta1\**" />
     <None Remove="Components\Pages\NovaPasta2\**" />
     <None Remove="Components\Pages\NovaPasta3\**" />
-    <None Remove="Components\Pages\NovaPasta\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Components\Pages\Funcionario.razor" />
+    <None Include="Components\Pages\Funcionario\Funcionarios.razor" />
   </ItemGroup>
 
   <ItemGroup>
