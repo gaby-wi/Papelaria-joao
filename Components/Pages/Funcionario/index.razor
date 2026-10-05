@@ -1,9 +1,6 @@
-<<<<<<< Updated upstream
-﻿@page "/funcionario/cadastro"
-=======
+@page "/funcionario/cadastro"
 ﻿@page "/Index"
 
->>>>>>> Stashed changes
 @inject AppPapelaria1.Config.Conexao Conexao
 @using AppPapelaria1.Model
 @using AppPapelaria1.DAO
@@ -99,7 +96,6 @@
     </div>
 </div>
 
-<<<<<<< Updated upstream
 @code {
     private string nome = "";
     private string cpf = "";
@@ -141,7 +137,6 @@
         {
             mensagem = "Erro ao cadastrar funcionário: " + ex.Message;
         }
-=======
 </div>
 
 
@@ -159,25 +154,20 @@
     private void Cadastrar()
     {
         mensagem = "Funcionário cadastrado com sucesso!";
->>>>>>> Stashed changes
+
     }
 
     private void Limpar()
-    {
-<<<<<<< Updated upstream
+
         nome = "";
-=======
+
         Nome = "";
->>>>>>> Stashed changes
         cpf = "";
         senha = "";
         telefone = "";
         sexo = "";
         endereco = "";
         email = "";
-<<<<<<< Updated upstream
-=======
         mensagem = "";
->>>>>>> Stashed changes
     }
 }
