@@ -34,19 +34,16 @@ public class CaixaDAO
                 {
                     Id = leitor.GetInt32("id_cai"),
 
-                    // Tratamento para DataAbertura (verifica DBNull)
                     DataAbertura = leitor.IsDBNull(leitor.GetOrdinal("data_abertura_cai"))
                         ? null
                         : leitor.GetDateTime("data_abertura_cai"),
 
-                    // Tratamento para DataFechamento (se estiver nulo no banco)
                     DataFechamento = leitor.IsDBNull(leitor.GetOrdinal("data_fechamento_cai"))
                         ? null
                         : leitor.GetDateTime("data_fechamento_cai"),
 
                     ValorInicial = leitor.GetFloat("valor_inicial_cai"),
 
-                    // Tratamento para ValorFinal (se estiver nulo no banco)
                     ValorFinal = leitor.IsDBNull(leitor.GetOrdinal("valor_final_cai"))
                         ? null
                         : leitor.GetFloat("valor_final_cai"),
@@ -79,7 +76,6 @@ public class CaixaDAO
             using var comando = con.CreateCommand();
             comando.CommandText = sql;
 
-            // Tratamento do envio para o MySQL: Se for null, envia DBNull.Value
             comando.Parameters.AddWithValue("@dataAbertura", (object?)caixa.DataAbertura ?? DBNull.Value);
             comando.Parameters.AddWithValue("@dataFechamento", (object?)caixa.DataFechamento ?? DBNull.Value);
             comando.Parameters.AddWithValue("@valorInicial", caixa.ValorInicial);
