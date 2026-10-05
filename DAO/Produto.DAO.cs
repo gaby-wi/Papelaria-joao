@@ -47,24 +47,24 @@ namespace AppPapelaria1.DAO
             }
         }
 
-        // Método que estava faltando:
-        public bool Inserir(Produto produto)
+        public void Inserir(Produto produto)
         {
             try
             {
                 using var con = _conexao.GetConnection();
-                string sql = @"INSERT INTO Produto (nome_pro, preco_pro, id_cate_fk) 
-                              VALUES (@nome, @preco, @idCategoria)";
+
+                string sql = @"INSERT INTO Produto (nome_prod, preco_prod, id_categoria) 
+                       VALUES (@nome, @preco, @idCategoria)";
 
                 using var comando = con.CreateCommand();
+
                 comando.CommandText = sql;
 
                 comando.Parameters.AddWithValue("@nome", produto.Nome);
                 comando.Parameters.AddWithValue("@preco", produto.Preco);
                 comando.Parameters.AddWithValue("@idCategoria", produto.IdCategoria);
 
-                int linhasAfetadas = comando.ExecuteNonQuery();
-                return linhasAfetadas > 0;
+                comando.ExecuteNonQuery();
             }
             catch
             {

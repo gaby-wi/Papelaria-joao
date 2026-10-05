@@ -1,5 +1,5 @@
 ﻿@page "/produto"
-@inject ProdutoDAO produtoDAO
+@inject ProdutoDAO dao
 @inject AppPapelaria1.Config.Conexao Conexao
 @using AppPapelaria1.Model;
 @using AppPapelaria1.DAO;
@@ -168,55 +168,65 @@
     }
 </style>
 
+
 @code {
     string id = "";
     string nome = "";
     float preco = 0;
     int idCategoria = 0;
 
-    string mensagem = "";
+    // Use o namespace completo para não conflitar com o nome da página/componente
+    private AppPapelaria1.Model.Produto p = new();
+    private List<AppPapelaria1.Model.Produto> produtos = new();
+    private string mensagem = "";
+    private bool sucesso = false;
 
-    void Cadastrar()
+    protected void OnInitialized()
     {
-        if (string.IsNullOrWhiteSpace(nome) || preco <= 0 || idCategoria <= 0)
-        {
-            mensagem = "Preencha todos os campos obrigatórios corretamente.";
-            return;
-        }
+        CarregarProdutos();
+    }
 
+    private void CarregarProdutos()
+    {
         try
         {
-            // Especificando AppPapelaria1.Model.Produto para tirar a ambiguidade:
-            var p = new AppPapelaria1.Model.Produto
-            {
-                Nome = nome,
-                Preco = preco,
-                IdCategoria = idCategoria
-            };
-
-            bool sucesso = produtoDAO.Inserir(p);
-
-            if (sucesso)
-            {
-                mensagem = "Produto cadastrado com sucesso!";
-                Limpar();
-            }
-            else
-            {
-                mensagem = "Erro ao cadastrar produto no banco de dados.";
-            }
+            var dao = new ProdutoDAO(Conexao);
+            produtos = dao.Listar();
         }
-        catch (Exception ex)
+        catch
         {
-            mensagem = $"Erro: {ex.Message}";
+            produtos = new List<AppPapelaria1.Model.Produto>();
         }
     }
 
-    void Limpar()
+    private void Cadastrar()
     {
-        id = "";
-        nome = "";
-        preco = 0;
-        idCategoria = 0;
+        try
+        {
+            var dao = new ProdutoDAO(Conexao);
+            dao.Inserir(p);
+
+            mensagem = "Produto cadastrado com sucesso!";
+            sucesso = true;
+            
+            LimparFormulario();
+            CarregarProdutos();
+        }
+        catch (Exception ex)
+        {
+            mensagem = "Erro ao cadastrar no banco: " + ex.Message;
+            sucesso = false;
+        }
+    }
+
+    private void LimparFormulario()
+    {
+        p = new AppPapelaria1.Model.Produto();
+    }
+
+    private void Limpar()
+    {
+        LimparFormulario();
+        mensagem = "";
     }
 }
