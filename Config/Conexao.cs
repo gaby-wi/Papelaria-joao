@@ -23,6 +23,6 @@ namespace AppPapelaria1.Config
             return new MySqlCommand(query, conn);
         }
 
-      
+
     }
 }

@@ -1,4 +1,7 @@
-﻿
+﻿@using AppPapelaria1.Model
+@using AppPapelaria1.Config
+@inject FornecedorDAO fornecedorDao
+@inject CategoriaDAO categoriaDao
 
             <h2>Fornecedor</h2>
 
@@ -49,22 +52,15 @@
         
 
 @code {
-    // Declarando as variáveis da lista para o Blazor reconhecer no HTML
-    private List<Fornecedor> fornecedores { get; set; } = new();
-    
-    // Força o tipo correto usando o caminho completo da pasta Model:
-    private List<AppPapelaria1.Model.Categoria> categorias { get; set; } = new();
+    private List<Fornecedor> fornecedores = new();
+    private List<AppPapelaria1.Model.Categoria> categorias = new();
 
-
-    protected override Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        // Busca os fornecedores
-        fornecedores = FornecedorP.Listar();
+        // Substitui o uso de FornecedorP.Listar()
+        fornecedores = fornecedorDao.Listar();
 
-        // Instancia o CategoriaDAO com a conexão injetada e busca as categorias
-        var categoriaDAO = new CategoriaDAO(Conexao);
-        categorias = categoriaDAO.Listar();
-
-        return Task.CompletedTask; 
+        // Substitui a instanciação manual passando o tipo Conexao
+        categorias = categoriaDao.Listar();
     }
-} 
+}
