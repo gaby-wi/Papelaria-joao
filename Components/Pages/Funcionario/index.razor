@@ -1,29 +1,21 @@
-﻿<h3>index</h3>
-
+﻿@page "/funcionario/cadastro"
 @inject AppPapelaria1.Config.Conexao Conexao
-@using AppPapelaria1.Model;
-@using AppPapelaria1.DAO;
+@using AppPapelaria1.Model
+@using AppPapelaria1.DAO
 
 <div class="container">
-
     <div class="conteudo">
-
         <div class="card">
-
             <h2>Cadastro de Funcionário</h2>
 
-            <div class="d-flex justify-content-between align-items-cent
-                er mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h2 class="fw-bold mb-1">Consulta de Funcionários</h2>
-
                 </div>
                 <div>
                     <a href="/funcionario/cadastro" class="btn btn-primary">
                         <i class="bi bi-plus-lg"></i> Novo Funcionário
-
                     </a>
-                   
                 </div>
             </div>
 
@@ -99,7 +91,60 @@
             }
 
         </div>
-
     </div>
-
 </div>
+
+@code {
+    private string nome = "";
+    private string cpf = "";
+    private string senha = "";
+    private string telefone = "";
+    private string sexo = "";
+    private string endereco = "";
+    private string email = "";
+    private string mensagem = "";
+
+    private void Cadastrar()
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(nome) || string.IsNullOrWhiteSpace(cpf))
+            {
+                mensagem = "Por favor, preencha pelo menos o Nome e o CPF.";
+                return;
+            }
+
+            var novoFuncionario = new Funcionario
+            {
+                Nome = nome,
+                Cpf = cpf,
+                Senha = senha,
+                Telefone = telefone,
+                Sexo = sexo,
+                Endereco = endereco,
+                Email = email
+            };
+
+            var dao = new FuncionarioDAO(Conexao);
+            dao.Inserir(novoFuncionario);
+
+            mensagem = "Funcionário cadastrado com sucesso!";
+            Limpar();
+        }
+        catch (Exception ex)
+        {
+            mensagem = "Erro ao cadastrar funcionário: " + ex.Message;
+        }
+    }
+
+    private void Limpar()
+    {
+        nome = "";
+        cpf = "";
+        senha = "";
+        telefone = "";
+        sexo = "";
+        endereco = "";
+        email = "";
+    }
+}
