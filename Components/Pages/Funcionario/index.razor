@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 ﻿@page "/funcionario/cadastro"
+=======
+﻿@page "/Index"
+
+>>>>>>> Stashed changes
 @inject AppPapelaria1.Config.Conexao Conexao
 @using AppPapelaria1.Model
 @using AppPapelaria1.DAO
@@ -13,7 +18,7 @@
                     <h2 class="fw-bold mb-1">Consulta de Funcionários</h2>
                 </div>
                 <div>
-                    <a href="/funcionario/cadastro" class="btn btn-primary">
+                    <a href="/funcionarios/cadastro" class="btn btn-primary">
                         <i class="bi bi-plus-lg"></i> Novo Funcionário
                     </a>
                 </div>
@@ -23,7 +28,7 @@
             <div class="grupo-input">
                 <label>Nome</label>
                 <input type="text"
-                       @bind="nome"
+                       @bind="Nome"
                        placeholder="Digite o nome do funcionário" />
             </div>
 
@@ -94,6 +99,7 @@
     </div>
 </div>
 
+<<<<<<< Updated upstream
 @code {
     private string nome = "";
     private string cpf = "";
@@ -135,16 +141,43 @@
         {
             mensagem = "Erro ao cadastrar funcionário: " + ex.Message;
         }
+=======
+</div>
+
+
+
+@code {
+    private string Nome { get; set; } = "";
+    private string cpf { get; set; } = "";
+    private string senha { get; set; } = "";
+    private string telefone { get; set; } = "";
+    private string sexo { get; set; } = "";
+    private string endereco { get; set; } = "";
+    private string email { get; set; } = "";
+    private string mensagem { get; set; } = "";
+
+    private void Cadastrar()
+    {
+        mensagem = "Funcionário cadastrado com sucesso!";
+>>>>>>> Stashed changes
     }
 
     private void Limpar()
     {
+<<<<<<< Updated upstream
         nome = "";
+=======
+        Nome = "";
+>>>>>>> Stashed changes
         cpf = "";
         senha = "";
         telefone = "";
         sexo = "";
         endereco = "";
         email = "";
+<<<<<<< Updated upstream
+=======
+        mensagem = "";
+>>>>>>> Stashed changes
     }
 }
