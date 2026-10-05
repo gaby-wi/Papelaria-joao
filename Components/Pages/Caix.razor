@@ -108,13 +108,7 @@
                             </td>
 
                             <td>
-
-                                @(c.ValorFinal.HasValue 
-                                    ? $"R$ {c.ValorFinal.Value:F2}" 
-                                    : "-")
-
                                 R$ @c.ValorFinal.Value.ToString("F2")
-
                             </td>
 
                             <td>
