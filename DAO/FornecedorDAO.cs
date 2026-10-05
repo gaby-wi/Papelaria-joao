@@ -55,19 +55,7 @@ namespace AppPapelaria1.DAO;
     {
         try
         {
-            //var fornecedor = new Fornecedor();
-            //fornecedor.Id = leitor.GetInt32("id_for");
-            //fornecedor.Nome = leitor.GetString("nome_fantasia_for");
-            //fornecedor.Telefone = leitor.GetString("telefone_for");
-            //fornecedor.Email = leitor.GetString("email_for");
-            //fornecedor.Cnpj = leitor.GetString("cnpj_for");
-            //fornecedor.Endereco = leitor.GetString("endereco_for");
-    //        id_for int auto_increment primary key,
-    //nome_fantasia_for varchar(150) not null,
-    //telefone_for varchar(30),
-    //endereco_for varchar(100),
-    //cnpj_for varchar(20),
-    //email_for varchar(100)
+           
             using var con = _conexao.GetConnection();
             string sql = @"INSERT INTO fornecedor
                 (nome_fantasia_for, telefone_for, endereco_for, cnpj_for, email_for)
