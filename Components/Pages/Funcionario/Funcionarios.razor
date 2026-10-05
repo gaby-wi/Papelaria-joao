@@ -6,7 +6,8 @@
 
 <div class="container-fluid">
     <div class="conteudo">
-        <div class="card">
+        <!-- CARD DE CADASTRO -->
+        <div class="card mb-4">
             <h2>Cadastro de Funcionário</h2>
 
             @if (!string.IsNullOrEmpty(mensagem))
@@ -71,6 +72,48 @@
                 </div>
             </EditForm>
         </div>
+
+        <!-- CARD DE CONSULTA / HISTÓRICO -->
+        <div class="card">
+            <h2>Lista de Funcionários</h2>
+
+            @if (funcionarios == null)
+            {
+                <p><em>A carregar funcionários...</em></p>
+            }
+            else if (funcionarios.Count == 0)
+            {
+                <p style="color: #6b7280; text-align: center;">Nenhum funcionário encontrado.</p>
+            }
+            else
+            {
+                <div style="overflow-x: auto;">
+                    <table class="tabela-custom">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Telefone</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var func in funcionarios)
+                            {
+                                <tr>
+                                    <td>@func.Id</td>
+                                    <td>@func.Nome</td>
+                                    <td>@func.Cpf</td>
+                                    <td>@func.Telefone</td>
+                                    <td>@func.Email</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
     </div>
 </div>
 
@@ -83,7 +126,7 @@
 
     .conteudo {
         width: 100%;
-        max-width: 600px;
+        max-width: 750px;
     }
 
     .card {
@@ -91,6 +134,7 @@
         border-radius: 16px;
         padding: 24px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
     }
 
     .card h2 {
@@ -165,12 +209,57 @@
     .btn-secondary:hover {
         background-color: #e9d5ff;
     }
+
+    /* Estilos da Tabela */
+    .tabela-custom {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .tabela-custom th {
+        background-color: #f3e8ff;
+        color: #7e22ce;
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .tabela-custom td {
+        padding: 12px;
+        border-bottom: 1px solid #f3e8ff;
+        color: #374151;
+        font-size: 14px;
+    }
+
+    .tabela-custom tr:hover {
+        background-color: #faf5ff;
+    }
 </style>
 
 @code {
     private Funcionario f = new();
+    private List<Funcionario> funcionarios = new();
     private string mensagem = "";
     private bool sucesso = false;
+
+    protected override void OnInitialized()
+    {
+        CarregarFuncionarios();
+    }
+
+    private void CarregarFuncionarios()
+    {
+        try
+        {
+            var dao = new FuncionarioDAO(Conexao);
+            funcionarios = dao.Listar(); // Certifique-se que o método 'Listar()' existe no FuncionarioDAO
+        }
+        catch
+        {
+            funcionarios = new List<Funcionario>();
+        }
+    }
 
     private void Cadastrar()
     {
@@ -181,7 +270,9 @@
 
             mensagem = "Funcionário cadastrado com sucesso!";
             sucesso = true;
+            
             LimparFormulario();
+            CarregarFuncionarios(); // Atualiza a tabela após cadastrar
         }
         catch (Exception ex)
         {
