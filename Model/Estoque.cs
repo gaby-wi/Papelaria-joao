@@ -7,7 +7,7 @@ namespace AppPapelaria1.Model
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O campo Quantidade Inicial é obrigatório.")]
-        public string QuantidadeInicial { get; set; }
+        public string QuantidadeInicial { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "O campo Quantidade Final é obrigatório.")]
         public int QuantidadeFinal { get; set; }
