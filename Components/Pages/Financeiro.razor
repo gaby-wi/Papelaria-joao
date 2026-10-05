@@ -1,199 +1,119 @@
 ﻿@page "/financeiro"
+@rendermode InteractiveServer
 @inject AppPapelaria1.Config.Conexao Conexao
-@inject IJSRuntime JS
-@inject FinanceiroDAO financeiroDAO
-@using AppPapelaria1.Model;
-@using AppPapelaria1.DAO;
+@inject NavigationManager Navigation
+@using FinanceiroModel = AppPapelaria1.Model.Financeiro
+@using AppPapelaria1.DAO
 
-
-<div class="container">
-
-    <div class="conteudo">
-
-        <div class="card">
-            @* id_fin int auto_increment primary key,
-               tipo_fin varchar(100),
-               valor_fin float,
-               data_fin date,
-
-               id_fun_fk int not null,
-               foreign key (id_fun_fk) references Funcionario(id_fun),
-
-               id_vend_fk int not null,
-               foreign key (id_vend_fk) references Venda(id_vend) *@
-
-            <h2>Cadastro Financeiro</h2>
-
-            <!-- Tipo de Movimentação -->
-            <div class="grupo-input">
-                <label>Tipo de Movimentação</label>
-                <select @bind="tipo">
-                    <option>Entrada</option>
-                    <option>Saída</option>
-                </select>
-            </div>
-
-            <!-- Descrição -->
-            <div class="grupo-input">
-                <label>Descrição</label>
-                <input type="text"
-                       @bind="descricao"
-                       placeholder="ex: Pagamento de fornecedor" />
-            </div>
-
-            <!-- Valor -->
-            <div class="grupo-input">
-                <label>Valor (R$)</label>
-                <input type="number" step="0.01"
-                       @bind="valor"
-                       placeholder="ex: 150.00" />
-            </div>
-
-            <!-- Forma de Pagamento -->
-            <div class="grupo-input">
-                <label>Forma de Pagamento</label>
-                <select @bind="formaPagamento">
-                    <option>Dinheiro</option>
-                    <option>Pix</option>
-                    <option>Cartão de Crédito</option>
-                    <option>Cartão de Débito</option>
-                    <option>Boleto</option>
-                </select>
-            </div>
-
-            <!-- Data -->
-            <div class="grupo-input">
-                <label>Data</label>
-                <input type="date"
-                       @bind="data" />
-            </div>
-
-            <!-- Chaves Estrangeiras -->
-            <div class="grupo-input">
-                <label>Id do Funcionário</label>
-                <input type="text"
-                       @bind="idFuncionario"
-                       placeholder="ex: 1" />
-            </div>
-
-            <div class="grupo-input">
-                <label>Id da Venda</label>
-                <input type="text"
-                       @bind="idVenda"
-                       placeholder="ex: 10" />
-            </div>
-
-            <!-- Observação -->
-            <div class="grupo-input">
-                <label>Observação</label>
-                <input type="text"
-                       @bind="observacao"
-                       placeholder="ex: Observações adicionais" />
-            </div>
-
-            <!-- Botões de Ação -->
-            <div class="grupo-botoes">
-                <button class="btn-primary" @onclick="CadastrarMovimentacao">+ Salvar Movimentação</button>
-                <button class="btn-secondary" @onclick="Limpar">Cancelar</button>
-            </div>
-
-            <!-- Mensagem de Retorno -->
-            @if (!string.IsNullOrEmpty(mensagem))
-            {
-                <p class="mensagem">@mensagem</p>
-            }
-
-        </div>
-
-        <!-- Card Resumo Financeiro -->
-        <div class="card card-resumo">
-            <h2>Resumo Financeiro</h2>
-            <div class="resumo-item">
-                <span>Receitas:</span>
-                <strong class="texto-sucesso">R$ @totalReceitas.ToString("F2")</strong>
-            </div>
-            <div class="resumo-item">
-                <span>Despesas:</span>
-                <strong class="texto-perigo">R$ @totalDespesas.ToString("F2")</strong>
-            </div>
-            <div class="resumo-item">
-                <span>Saldo:</span>
-                <strong>R$ @saldo.ToString("F2")</strong>
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-<!-- Estilização CSS -->
 <style>
-    .container {
+    .container-financeiro {
         display: flex;
         justify-content: center;
         padding: 20px;
+        font-family: system-ui, -apple-system, sans-serif;
     }
 
-    .conteudo {
+    .conteudo-financeiro {
         width: 100%;
-        max-width: 600px;
+        max-width: 650px;
     }
 
-    .card {
+    .topo-acoes {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 12px;
+    }
+
+    .btn-voltar {
+        background-color: #f3e8ff;
+        color: #7e22ce;
+        border: 1px solid #e9d5ff;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .btn-voltar:hover {
+        background-color: #e9d5ff;
+    }
+
+    .card-fin {
         background-color: #ffffff;
         border-radius: 16px;
         padding: 24px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         margin-bottom: 24px;
+        border: 1px solid #f3e8ff;
     }
 
-        .card h2 {
-            color: #8b5cf6;
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
+    .card-fin h2 {
+        color: #8b5cf6;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
 
-    .grupo-input {
+    .alerta-box {
+        padding: 12px 16px;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .alerta-box-sucesso {
+        background-color: #d1fae5;
+        color: #065f46;
+        border: 1px solid #a7f3d0;
+    }
+
+    .alerta-box-erro {
+        background-color: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+    }
+
+    .grupo-campo {
         display: flex;
         flex-direction: column;
         margin-bottom: 16px;
     }
 
-        .grupo-input label {
-            color: #4b5563;
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 6px;
-        }
+    .grupo-campo label {
+        color: #374151;
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
 
-        .grupo-input input, .grupo-input select {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e9d5ff;
-            border-radius: 12px;
-            outline: none;
-            font-size: 14px;
-            color: #374151;
-            background-color: #ffffff;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
-        }
+    .grupo-campo input, .grupo-campo select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e9d5ff;
+        border-radius: 12px;
+        outline: none;
+        font-size: 14px;
+        color: #1f2937;
+        background-color: #ffffff;
+        box-sizing: border-box;
+    }
 
-            .grupo-input input:focus, .grupo-input select:focus {
-                border-color: #8b5cf6;
-            }
+    .grupo-campo input:focus, .grupo-campo select:focus {
+        border-color: #8b5cf6;
+    }
 
-    .grupo-botoes {
+    .grupo-botoes-fin {
         display: flex;
         gap: 12px;
         margin-top: 24px;
     }
 
-    .btn-primary {
+    .btn-salvar {
         flex: 1;
         background-color: #a855f7;
-        color: white;
+        color: #ffffff;
         border: none;
         padding: 12px 20px;
         border-radius: 12px;
@@ -202,11 +122,11 @@
         transition: background-color 0.2s;
     }
 
-        .btn-primary:hover {
-            background-color: #9333ea;
-        }
+    .btn-salvar:hover {
+        background-color: #9333ea;
+    }
 
-    .btn-secondary {
+    .btn-cancelar {
         flex: 1;
         background-color: #f3e8ff;
         color: #7e22ce;
@@ -218,86 +138,287 @@
         transition: background-color 0.2s;
     }
 
-        .btn-secondary:hover {
-            background-color: #e9d5ff;
-        }
-
-    .mensagem {
-        margin-top: 16px;
-        font-weight: 600;
-        color: #6b21a8;
+    .btn-cancelar:hover {
+        background-color: #e9d5ff;
     }
 
-    /* Estilos adicionais para o Resumo */
-    .resumo-item {
+    /* Estilo do Resumo Financeiro */
+    .resumo-linha {
         display: flex;
         justify-content: space-between;
-        padding: 8px 0;
+        align-items: center;
+        padding: 12px 0;
         font-size: 16px;
         border-bottom: 1px solid #f3e8ff;
     }
 
-        .resumo-item:last-child {
-            border-bottom: none;
-        }
-
-    .texto-sucesso {
-        color: #16a34a;
+    .resumo-linha:last-child {
+        border-bottom: none;
     }
 
-    .texto-perigo {
-        color: #dc2626;
+    .resumo-rotulo {
+        color: #374151 !important;
+        font-weight: 600;
+    }
+
+    .resumo-valor {
+        color: #1f2937 !important;
+        font-weight: 700;
+    }
+
+    .texto-verde {
+        color: #16a34a !important;
+        font-weight: 700;
+    }
+
+    /* Estilo da Tabela */
+    .tabela-wrapper {
+        overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid #e9d5ff;
+    }
+
+    .tabela-fin {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #ffffff;
+    }
+
+    .tabela-fin th {
+        background-color: #8b5cf6 !important;
+        color: #ffffff !important;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 12px 14px;
+        text-align: left;
+    }
+
+    .tabela-fin td {
+        padding: 12px 14px;
+        border-bottom: 1px solid #f3e8ff;
+        color: #1f2937 !important;
+        font-size: 14px;
+        vertical-align: middle;
+    }
+
+    .tabela-fin tbody tr:nth-child(even) {
+        background-color: #faf5ff;
+    }
+
+    .tabela-fin tbody tr:hover {
+        background-color: #f3e8ff;
+    }
+
+    .valor-verde {
+        font-weight: 600;
+        color: #15803d !important;
+    }
+
+    .tag-tipo {
+        background-color: #f3e8ff;
+        color: #6b21a8;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 12px;
     }
 </style>
 
+<div class="container-financeiro">
+    <div class="conteudo-financeiro">
+
+        <!-- BOTÃO VOLTAR -->
+        <div class="topo-acoes">
+            <button class="btn-voltar" @onclick="VoltarInicio">← Voltar ao Início</button>
+        </div>
+
+        <!-- Card de Formulario -->
+        <div class="card-fin">
+            <h2>Cadastro Financeiro</h2>
+
+            @if (!string.IsNullOrEmpty(mensagem))
+            {
+                <div class="alerta-box @(sucesso ? "alerta-box-sucesso" : "alerta-box-erro")">
+                    @mensagem
+                </div>
+            }
+
+            <EditForm Model="f" OnSubmit="CadastrarMovimentacao">
+                <!-- Forma / Tipo de Pagamento -->
+                <div class="grupo-campo">
+                    <label>Forma / Tipo de Pagamento</label>
+                    <select @bind="f.Tipo">
+                        <option value="Pix">Pix</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                        <option value="Cartão de Débito">Cartão de Débito</option>
+                        <option value="Boleto">Boleto</option>
+                    </select>
+                </div>
+
+                <!-- Valor -->
+                <div class="grupo-campo">
+                    <label>Valor (R$)</label>
+                    <input type="number" step="0.01"
+                           @bind="f.Valor"
+                           placeholder="ex: 150.00" required />
+                </div>
+
+                <!-- Data -->
+                <div class="grupo-campo">
+                    <label>Data</label>
+                    <input type="date"
+                           @bind="f.Data" />
+                </div>
+
+                <!-- Chaves Estrangeiras -->
+                <div class="grupo-campo">
+                    <label>ID do Funcionário (Existente)</label>
+                    <input type="number"
+                           @bind="f.IdFuncionario"
+                           placeholder="ex: 1 a 5" required />
+                </div>
+
+                <div class="grupo-campo">
+                    <label>ID da Venda (Existente)</label>
+                    <input type="number"
+                           @bind="f.IdVenda"
+                           placeholder="ex: 1 a 5" required />
+                </div>
+
+                <!-- Botões de Ação -->
+                <div class="grupo-botoes-fin">
+                    <button type="submit" class="btn-salvar">+ Salvar Movimentação</button>
+                    <button type="button" class="btn-cancelar" @onclick="Limpar">Cancelar</button>
+                </div>
+            </EditForm>
+        </div>
+
+        <!-- Card Resumo Financeiro -->
+        <div class="card-fin">
+            <h2>Resumo Financeiro</h2>
+            <div class="resumo-linha">
+                <span class="resumo-rotulo">Total de Registros:</span>
+                <strong class="resumo-valor">@listaFinanceiro.Count</strong>
+            </div>
+            <div class="resumo-linha">
+                <span class="resumo-rotulo">Total Acumulado:</span>
+                <strong class="texto-verde">R$ @totalAcumulado.ToString("N2")</strong>
+            </div>
+        </div>
+
+        <!-- Tabela de Movimentações Cadastradas -->
+        <div class="card-fin">
+            <h2>Movimentações Cadastradas</h2>
+            @if (listaFinanceiro == null || listaFinanceiro.Count == 0)
+            {
+                <p style="color: #6b7280; text-align: center; padding: 10px;">Nenhuma movimentação cadastrada.</p>
+            }
+            else
+            {
+                <div class="tabela-wrapper">
+                    <table class="tabela-fin">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>Data</th>
+                                <th>Func.</th>
+                                <th>Venda</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in listaFinanceiro)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td><span class="tag-tipo">@item.Tipo</span></td>
+                                    <td class="valor-verde">R$ @item.Valor.ToString("N2")</td>
+                                    <td>@item.Data.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.IdFuncionario</td>
+                                    <td>@item.IdVenda</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
 @code {
-    string tipo = "Entrada";
-    string descricao = "";
-    decimal valor = 0;
-    string formaPagamento = "Dinheiro";
-    DateTime data = DateTime.Today;
-    string idFuncionario = "";
-    string idVenda = "";
-    string observacao = "";
+    private FinanceiroModel f = new FinanceiroModel { Tipo = "Pix", Data = DateTime.Today, IdFuncionario = 1, IdVenda = 1 };
+    private List<FinanceiroModel> listaFinanceiro = new();
 
-    string mensagem = "";
+    private string mensagem = "";
+    private bool sucesso = false;
+    private float totalAcumulado = 0;
 
-    decimal totalReceitas = 0;
-    decimal totalDespesas = 0;
-    decimal saldo = 0;
-
-    void CadastrarMovimentacao()
+    protected override void OnInitialized()
     {
-        if (valor <= 0 || string.IsNullOrWhiteSpace(idFuncionario) || string.IsNullOrWhiteSpace(idVenda))
-        {
-            mensagem = "Preencha o valor e os Ids de referência corretamente.";
-            return;
-        }
-
-        if (tipo == "Entrada")
-        {
-            totalReceitas += valor;
-        }
-        else
-        {
-            totalDespesas += valor;
-        }
-
-        saldo = totalReceitas - totalDespesas;
-        mensagem = $"{tipo} cadastrada com sucesso!";
-
-        Limpar();
+        CarregarDados();
     }
 
-    void Limpar()
+    private void CarregarDados()
     {
-        tipo = "Entrada";
-        descricao = "";
-        valor = 0;
-        formaPagamento = "Dinheiro";
-        data = DateTime.Today;
-        idFuncionario = "";
-        idVenda = "";
-        observacao = "";
+        try
+        {
+            var dao = new FinanceiroDAO(Conexao);
+            listaFinanceiro = dao.Listar();
+            totalAcumulado = listaFinanceiro.Sum(x => x.Valor);
+        }
+        catch (Exception ex)
+        {
+            mensagem = "Erro ao carregar dados do banco: " + ex.Message;
+            sucesso = false;
+            listaFinanceiro = new List<FinanceiroModel>();
+        }
+    }
+
+    private void CadastrarMovimentacao()
+    {
+        try
+        {
+            if (f.Valor <= 0)
+            {
+                mensagem = "Por favor, informe um valor maior que zero.";
+                sucesso = false;
+                return;
+            }
+
+            if (f.IdFuncionario <= 0 || f.IdVenda <= 0)
+            {
+                mensagem = "Informe IDs de Funcionário e Venda válidos.";
+                sucesso = false;
+                return;
+            }
+
+            var dao = new FinanceiroDAO(Conexao);
+            dao.Inserir(f);
+
+            mensagem = "Movimentação salva com sucesso no banco de dados!";
+            sucesso = true;
+
+            Limpar();
+            CarregarDados();
+        }
+        catch (Exception ex)
+        {
+            mensagem = "Erro ao salvar no banco: " + ex.Message;
+            sucesso = false;
+        }
+    }
+
+    private void Limpar()
+    {
+        f = new FinanceiroModel { Tipo = "Pix", Data = DateTime.Today, IdFuncionario = 1, IdVenda = 1 };
+    }
+
+    private void VoltarInicio()
+    {
+        Navigation.NavigateTo("/");
     }
 }
