@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices;
 
 namespace AppPapelaria1.Model
 {
+  
     public class Funcionario
     {
-
+       
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O nome do funcionário é obrigatório.")]

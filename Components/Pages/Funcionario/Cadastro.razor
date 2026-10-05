@@ -1,0 +1,204 @@
+﻿@page "/funcionario/cadastro"
+
+@rendermode InteractiveServer
+
+@inject FuncionarioDAO dao
+@inject NavigationManager NavigationManager
+
+@using AppPapelaria1.Model
+@using AppPapelaria1.DAO
+
+<PageTitle>Novo Funcionário - Sistema de Papelaria</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h2 class="fw-bold mb-1">
+            Cadastro de Funcionário
+        </h2>
+    </div>
+
+</div>
+
+<div class="custom-table-card p-4">
+     <EditForm Model="funcionario" OnValidSubmit="Salvar">
+     <DataAnnotationsValidator />
+     <ValidationSummary class="alert alert-danger" />
+
+        <!-- Nome -->
+        <div class="row mb-3">
+
+            <div class="col-md-12">
+
+                <label for="nome" class="form-label">
+                    Nome
+                </label>
+
+                <InputText id="nome"
+                           class="form-control"
+                           @bind-Value="funcionario.Nome" />
+               <ValidationMessage For="@(() => funcionario.Nome)" />
+            </div>
+
+        </div>
+
+        <!-- CPF e Senha -->
+        <div class="row mb-3">
+
+            <div class="col-md-6">
+
+                <label for="cpf" class="form-label">
+                    CPF
+                </label>
+
+                <InputText id="cpf"
+                           class="form-control"
+                           @bind-Value="funcionario.Cpf" />
+
+                <ValidationMessage For="@(() => funcionario.Cpf)" />
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label for="senha" class="form-label">
+                    Senha
+                </label>
+
+                <InputText id="senha"
+                           type="password"
+                           class="form-control"
+                           @bind-Value="funcionario.Senha" />
+
+                <ValidationMessage For="@(() => funcionario.Senha)" />
+
+            </div>
+
+        </div>
+
+        <!-- Telefone e Sexo -->
+        <div class="row mb-3">
+
+            <div class="col-md-6">
+
+                <label for="telefone" class="form-label">
+                    Telefone
+                </label>
+
+                <InputText id="telefone"
+                           class="form-control"
+                           @bind-Value="funcionario.Telefone" />
+
+                <ValidationMessage For="@(() => funcionario.Telefone)" />
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label for="sexo" class="form-label">
+                    Sexo
+                </label>
+
+                <InputSelect id="sexo"
+                             class="form-select"
+                             @bind-Value="funcionario.Sexo">
+
+                    <option value="">
+                        Selecione o sexo
+                    </option>
+
+                    <option value="Feminino">
+                        Feminino
+                    </option>
+
+                    <option value="Masculino">
+                        Masculino
+                    </option>
+
+                    <option value="Outro">
+                        Outro
+                    </option>
+
+                </InputSelect>
+
+                <ValidationMessage For="@(() => funcionario.Sexo)" />
+
+            </div>
+
+        </div>
+
+        <!-- Endereço -->
+        <div class="row mb-3">
+
+            <div class="col-md-12">
+
+                <label for="endereco" class="form-label">
+                    Endereço
+                </label>
+
+                <InputText id="endereco"
+                           class="form-control"
+                           @bind-Value="funcionario.Endereco" />
+
+                <ValidationMessage For="@(() => funcionario.Endereco)" />
+
+            </div>
+
+        </div>
+
+        <!-- Email -->
+        <div class="row mb-3">
+
+            <div class="col-md-12">
+
+                <label for="email" class="form-label">
+                    Email
+                </label>
+
+                <InputText id="email"
+                           type="email"
+                           class="form-control"
+                           @bind-Value="funcionario.Email" />
+
+                <ValidationMessage For="@(() => funcionario.Email)" />
+
+            </div>
+
+        </div>
+
+        <!-- Botões -->
+        <div class="d-flex gap-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                <i class="bi bi-check-lg"></i>
+                Salvar
+
+            </button>
+
+            <a href="/funcionario"
+                   class="btn btn-light border">
+
+                Cancelar
+
+            </a>
+
+        </div>
+
+    </EditForm>
+
+</div>
+
+@code {
+
+    private Funcionario funcionario = new();
+
+    private void Salvar()
+    {
+        dao.Inserir(funcionario);
+
+        NavigationManager.NavigateTo("/funcionario");
+    }
+
+}
